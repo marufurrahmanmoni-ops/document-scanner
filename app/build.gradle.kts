@@ -60,7 +60,9 @@ android {
         buildConfigField("String", "PLAY_SUBSCRIPTION_ID", quoted("PLAY_SUBSCRIPTION_ID"))
         ndk {
             // Real phones only. The App Bundle splits per ABI so users download one copy of OpenCV.
-            abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
+            // -Pabi=arm64-v8a builds a single-ABI APK for sideloading onto a phone (about a third of the size).
+            val only = findProperty("abi") as String?
+            abiFilters += if (only != null) listOf(only) else listOf("arm64-v8a", "armeabi-v7a", "x86_64")
         }
     }
 
