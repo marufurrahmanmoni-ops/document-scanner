@@ -454,6 +454,13 @@ class DocumentRepository(
         blobs.clearTmp()
     }
 
+    /** Erases every document, page, pending change and stored image on this phone. Used by account deletion. */
+    suspend fun eraseEverything() = withContext(Dispatchers.IO) {
+        db.clearAllTables()
+        blobs.allHashes().forEach { (sha, _) -> blobs.delete(sha) }
+        blobs.clearTmp()
+    }
+
     // ---------------------------------------------------------------- helpers
 
     private suspend fun touchDocument(docId: String, now: Long) {

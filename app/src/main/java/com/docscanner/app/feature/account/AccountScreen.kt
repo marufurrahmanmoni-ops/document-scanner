@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -149,6 +150,7 @@ fun AccountScreen(onBack: () -> Unit) {
                         SignedIn(vm, acc, busy)
                         BackupSection(acc) { snackbar.showSnackbar(context.getString(it)) }
                         SubscriptionSection(acc) { snackbar.showSnackbar(context.getString(it)) }
+                        DeleteAccountSection(vm, acc, busy)
                     }
                 }
             }
@@ -286,4 +288,65 @@ private fun SignedIn(vm: AccountViewModel, account: Account, busy: Boolean) {
         variant = ButtonVariant.SECONDARY,
         enabled = !busy,
     )
+}
+
+@Composable
+private fun DeleteAccountSection(vm: AccountViewModel, account: Account, busy: Boolean) {
+    val context = LocalContext.current
+    var open by remember { mutableStateOf(false) }
+    SectionHeader(stringResource(R.string.delete_account))
+    Text(stringResource(R.string.delete_account_desc), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    ScannerButton(stringResource(R.string.delete_account), { open = true }, variant = ButtonVariant.DANGER, enabled = !busy)
+
+    if (open) {
+        var password by remember { mutableStateOf("") }
+        var eraseLocal by remember { mutableStateOf(false) }
+        var typed by remember { mutableStateOf("") }
+        val word = stringResource(R.string.delete_confirm_word)
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = { open = false },
+            title = { Text(stringResource(R.string.delete_account_q)) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(Dimens.space3)) {
+                    Text(stringResource(R.string.delete_account_body), style = MaterialTheme.typography.bodyMedium)
+                    Text(stringResource(R.string.delete_account_sub_note), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                    Row(
+                        Modifier.toggleable(value = eraseLocal, role = androidx.compose.ui.semantics.Role.Checkbox, onValueChange = { eraseLocal = it }),
+                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                    ) {
+                        androidx.compose.material3.Checkbox(checked = eraseLocal, onCheckedChange = null)
+                        Text(stringResource(R.string.delete_local_too), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = Dimens.space2))
+                    }
+                    if (account.usesPassword) {
+                        OutlinedTextField(
+                            value = password, onValueChange = { password = it }, singleLine = true,
+                            label = { Text(stringResource(R.string.password)) },
+                            visualTransformation = PasswordVisualTransformation(),
+                        )
+                    }
+                    OutlinedTextField(
+                        value = typed, onValueChange = { typed = it }, singleLine = true,
+                        label = { Text(stringResource(R.string.delete_type_word, word)) },
+                    )
+                }
+            },
+            confirmButton = {
+                androidx.compose.material3.TextButton(
+                    enabled = typed.trim().equals(word, ignoreCase = true) && (!account.usesPassword || password.isNotEmpty()) && !busy,
+                    onClick = {
+                        open = false
+                        vm.run(R.string.account_deleted) {
+                            val reauth = if (account.usesPassword) vm.container.auth.reauthenticateWithPassword(password)
+                            else vm.container.auth.reauthenticateWithGoogle(context)
+                            reauth.fold(
+                                onSuccess = { vm.container.accountDeletion.deleteEverything(context, eraseLocal) },
+                                onFailure = { Result.failure(it) },
+                            )
+                        }
+                    },
+                ) { Text(stringResource(R.string.delete_forever), color = MaterialTheme.colorScheme.error) }
+            },
+            dismissButton = { androidx.compose.material3.TextButton(onClick = { open = false }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
 }

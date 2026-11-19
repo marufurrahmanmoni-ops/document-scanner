@@ -256,6 +256,17 @@
     <string name="period_year">প্রতি বছর</string>
     <string name="period_other">প্রতি মেয়াদে</string>
 
+    <string name="delete_account">অ্যাকাউন্ট মুছুন</string>
+    <string name="delete_account_desc">আপনার অ্যাকাউন্ট ও এনক্রিপ্টেড ক্লাউড ব্যাকআপ চিরতরে মুছে দেয়।</string>
+    <string name="delete_account_q">আপনার অ্যাকাউন্ট মুছবেন?</string>
+    <string name="delete_account_body">আপনার অ্যাকাউন্ট, প্রোফাইল ও সব এনক্রিপ্টেড ব্যাকআপ কপি ক্লাউড থেকে মুছে যাবে। এটি ফেরানো যাবে না। নিচের বাক্সে টিক না দিলে এই ফোনের ডকুমেন্ট থেকে যাবে।</string>
+    <string name="delete_account_sub_note">অ্যাকাউন্ট মুছলে Google Play সাবস্ক্রিপশন বাতিল হয় না। আগে Google Play-তে বাতিল করুন।</string>
+    <string name="delete_local_too">এই ফোনের সব ডকুমেন্টও মুছে দিন</string>
+    <string name="delete_confirm_word">DELETE</string>
+    <string name="delete_type_word">নিশ্চিত করতে %1$s লিখুন</string>
+    <string name="delete_forever">চিরতরে মুছুন</string>
+    <string name="account_deleted">আপনার অ্যাকাউন্ট ও ক্লাউড ব্যাকআপ মুছে ফেলা হয়েছে।</string>
+
     <plurals name="pages">
         <item quantity="one">%1$d টি পাতা</item>
         <item quantity="other">%1$d টি পাতা</item>

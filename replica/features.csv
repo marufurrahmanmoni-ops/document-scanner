@@ -63,9 +63,9 @@ Merge and split PDFs,pdf,could,yes,no,[V:16] basic PDF tools; S05
 Export to Word (docx),export,could,yes,no,[V:1] [V:2]; S16
 Upload to Google Drive / Dropbox / OneDrive,export,could,yes,no,[V:2] [V:3] use official APIs or the share sheet
 Onboarding (short),onboarding,could,yes,no,[V:12]; S01
-Subscription paywall with honest trial,monetisation,could,yes,no,[V:1] [V:13] original trial complaints; S02
+Subscription paywall with honest trial,monetisation,could,yes,partial,"[V:1] [V:13] original trial complaints; S02 | Play Billing 8 + server verification (verifyPurchase, RTDN); what premium unlocks is undecided; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)"
 Find images by visual content,ocr,could,yes,no,[V:1]; S18
-Cloud sync across devices with account,sync,could,yes,no,[V:1]; needs own backend; L-size
+Cloud sync across devices with account,sync,could,yes,partial,"[V:1]; needs own backend; L-size | E2E-encrypted Firestore+Storage sync, 3-way merge, WorkManager; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)"
 Fax to 30+ countries,export,skip,yes,skip,[V:1] paid telecom partnership
 CamScanner Cloud and web app,sync,skip,yes,skip,[V:1] their service; build own sync if needed
 Shared with me / collaboration / comments,sync,skip,yes,skip,[V:11] needs own network and users
@@ -74,3 +74,10 @@ AI Erase,ai,skip,yes,skip,[V:12] premium AI feature; revisit later
 Ads,monetisation,skip,yes,skip,[V:1] [V:13] deliberately not copied
 Their brand name and Magic Color term and watermark text,brand,skip,yes,skip,trademarked; use original names
 Their OCR and edge-detection engines,detection,skip,yes,skip,proprietary; use ML Kit or OpenCV or your own model
+Sign up and sign in with email (verification + reset),account,should,yes,partial,[V:1] accounts sync docs | Firebase Auth; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)
+Sign in with Google,account,should,yes,partial,[I] | Credential Manager + Firebase; needs SHA-1 + web client id; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)
+User profile (display name),account,could,yes,partial,[I] | users/{uid}: name only; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)
+Encrypted cloud backup with explicit consent,sync,should,no,partial,"clone differentiator: end-to-end encrypted, off by default | compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)"
+Restore documents on a new phone,sync,should,yes,partial,[V:1] sync across devices | passphrase unlock + full pull; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)
+Sync conflict handling,sync,should,yes,partial,"[I] | field-level 3-way merge, edit beats delete, 6 tests; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)"
+Delete account and cloud data in app,account,must,yes,partial,[V:1] data deletion request | re-auth + client delete + server cleanup trigger; compiles; unit/emulator-tested; awaiting a real Firebase project + device test (replica/backend.md)

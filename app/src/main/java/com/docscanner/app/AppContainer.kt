@@ -2,6 +2,7 @@ package com.docscanner.app
 
 import android.app.ActivityManager
 import android.content.Context
+import com.docscanner.app.cloud.AccountDeletion
 import com.docscanner.app.cloud.AuthRepository
 import com.docscanner.app.cloud.BillingRepository
 import com.docscanner.app.cloud.CloudServices
@@ -56,6 +57,8 @@ class AppContainer(context: Context) {
     val cloud: CloudServices? by lazy { CloudServices.create(app) }
 
     val auth by lazy { AuthRepository(cloud) }
+
+    val accountDeletion by lazy { AccountDeletion(this) }
 
     val billing by lazy { BillingRepository(app, cloud, appScope) }
 

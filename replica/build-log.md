@@ -65,6 +65,20 @@ What WAS verified without those hosts:
 
 (The first build did surface errors, but only build configuration, not code. See the fixes above.)
 
+## Backend build (2026-11-19, /replica-backend): built module by module, each one compiled
+
+| module | result |
+| --- | --- |
+| B1 Firebase + auth | builds. Fixes: Firebase pulls the empty `listenablefuture` stub, so CameraX lost `ListenableFuture` → explicit Guava; Gradle OOM-killed (cgroup) → Kotlin compiles in-process, one 3 GB JVM |
+| B2 E2E crypto + merge | **10 new unit tests pass** (20 total) |
+| B3 sync engine | builds. Room v1→v2 migration SQL identical to Room's exported schema. Self-review fixed transaction-retry double-counting and orphan-page cursor loss |
+| B4 security rules | **11 Firestore rule tests pass on the emulator**. Negative control fails 2/11 as expected. Firestore emulator from gcloud via dl.google.com (firebase-tools' own host is blocked). Storage rules **not executed** (runtime host blocked) |
+| B5 billing + functions | app builds; functions **tsc clean, 8 tests pass**, module loads and exports 3 functions. Fix: Pub/Sub topic must be a deploy-time literal |
+| B6 deletion + docs | builds; lint 0 errors; `npm audit` 8 moderate → upgraded firebase-admin 14 / functions 7 → 0 |
+
+**Not verified:** nothing has run against a real Firebase project or Google Play (needs the owner's accounts). See
+`replica/backend.md` → "What you must create". Device testing is still pending for the whole app.
+
 ## Screens
 
 | ID | screen | date | status | missing | harder than expected |

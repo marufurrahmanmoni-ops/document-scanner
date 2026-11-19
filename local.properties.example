@@ -1,0 +1,16 @@
+# Copy to local.properties (git-ignored) or set the same names as environment variables in CI.
+# Android SDK location (Android Studio writes this line itself).
+sdk.dir=/path/to/Android/sdk
+
+# --- Firebase (Firebase console → Project settings → Your apps → Android app). Leave empty to build with
+# --- cloud features switched off (the app still works fully offline).
+FIREBASE_API_KEY=
+FIREBASE_APP_ID=
+FIREBASE_PROJECT_ID=
+FIREBASE_STORAGE_BUCKET=
+# Google sign-in: the *Web* OAuth client id (Firebase console → Authentication → Google → Web SDK configuration)
+GOOGLE_WEB_CLIENT_ID=
+# Region the Cloud Functions are deployed to (default us-central1)
+FUNCTIONS_REGION=
+# Google Play subscription product id (Play Console → Monetize → Subscriptions). Empty = no subscription UI.
+PLAY_SUBSCRIPTION_ID=
