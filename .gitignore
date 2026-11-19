@@ -28,6 +28,13 @@ firebase/functions/lib/
 firebase/*.log
 firebase/.firebaserc
 !/local.properties.example
+!/keystore.properties.example
 firebase/functions/.env
 firebase/functions/.env.*
 !firebase/functions/.env.example
+
+# Release signing: never commit the keystore or its passwords.
+keystore.properties
+*.jks
+*.keystore
+*.p12

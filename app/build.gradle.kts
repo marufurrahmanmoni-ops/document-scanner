@@ -25,6 +25,18 @@ fun cfg(name: String): String = (localProps.getProperty(name) ?: System.getenv(n
  */
 val robolectricTests = (findProperty("robolectric") as String?) == "true"
 
+/**
+ * Release signing comes from keystore.properties at the repo root (git-ignored), or from the environment in CI:
+ *   storeFile=/absolute/path/upload-key.jks  storePassword=...  keyAlias=upload  keyPassword=...
+ * Without it, release builds are produced unsigned and cannot be uploaded. Nothing secret is in source control.
+ */
+val signingProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+fun signing(key: String, env: String): String? = signingProps.getProperty(key) ?: System.getenv(env)
+val hasReleaseKey = signing("storeFile", "SIGNING_STORE_FILE") != null
+
 fun quoted(name: String): String = "\"" + cfg(name).replace("\"", "") + "\""
 
 android {
@@ -52,8 +64,20 @@ android {
         }
     }
 
+    signingConfigs {
+        if (hasReleaseKey) {
+            create("release") {
+                storeFile = file(signing("storeFile", "SIGNING_STORE_FILE")!!)
+                storePassword = signing("storePassword", "SIGNING_STORE_PASSWORD")
+                keyAlias = signing("keyAlias", "SIGNING_KEY_ALIAS")
+                keyPassword = signing("keyPassword", "SIGNING_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (hasReleaseKey) signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -147,7 +171,11 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
-    implementation(libs.firebase.functions)
+    implementation(libs.firebase.functions) {
+        // Legacy instance-ID (push messaging) is optional for callable functions; the app sends no push, so the
+        // RECEIVE permission and device token it brings are left out.
+        exclude(group = "com.google.firebase", module = "firebase-iid")
+    }
     implementation(libs.firebase.appcheck.playintegrity)
     debugImplementation(libs.firebase.appcheck.debug)
     implementation(libs.kotlinx.coroutines.play.services)

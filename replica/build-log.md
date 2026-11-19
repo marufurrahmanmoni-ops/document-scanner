@@ -126,3 +126,14 @@ What WAS verified without those hosts:
 1. Install `app-debug.apk` on a real phone (one low-end, one mid-range) and run flows F01–F03. Record crashes here.
 2. Calibrate `QuadTracker.minSharpness` on real devices (25 is a guess).
 3. Run `/replica-test` on F01–F03, then M3: OCR (Tesseract eng+ben), search, folders.
+
+## 2026-11-19: /replica-test, /replica-diff, /replica-deploy preflight
+
+- Tests: JVM 35/35 (15 new imaging tests on the real Kotlin detector and filters, run with desktop OpenCV), Firestore rules 11/11, Functions 8/8, release lint 0 errors / 45 warnings.
+- Written, compile, NOT run here: 17 Robolectric data-layer tests (`src/testRobolectric`, `-Probolectric=true`), 7 instrumented tests (`src/androidTest`).
+- BUG-001 (S1) fixed: `@Insert(REPLACE)` + `ON DELETE CASCADE` wiped pages on remote rename → `@Upsert`.
+- BUG-002 (S3) fixed: detector accepted ragged clutter contours → each side must lie on edge pixels.
+- Release: signing from git-ignored `keystore.properties` / `SIGNING_*` env; verified with a throwaway key outside the repo. AAB 59 MB, release APK 16 KB-aligned.
+- `firebase-iid` excluded from firebase-functions (drops the unused push RECEIVE permission). R8 passes; runtime check pending on a device.
+- Settings → About shows the developer: Md. Marufur Rahman Moni, with photo.
+- Reports: `test-plan.md`, `bug-report.md`, `parity.md`, `deploy.md`, `launch/privacy-policy.md` (draft).
