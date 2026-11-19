@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable data object FilesRoute                // S04
 @Serializable data object ToolsRoute                // S05
 @Serializable data object SettingsRoute             // S19
+@Serializable data object AccountRoute              // S06 account, backup, subscription
 
 /** S07. [mode] = single | batch. [targetDocId] adds pages to an existing document. [replacePageId] = retake. */
 @Serializable

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,19 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
+
+/**
+ * Backend configuration (see replica/backend.md). Read from local.properties, then environment variables.
+ * Nothing here is secret in the cryptographic sense (Firebase client config is public by design and protected by
+ * Security Rules + App Check), but it is kept out of git so each developer/CI points at its own Firebase project.
+ * Missing values build an app with cloud features switched off, never a broken app.
+ */
+val localProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+fun cfg(name: String): String = (localProps.getProperty(name) ?: System.getenv(name) ?: "").trim()
+fun quoted(name: String): String = "\"" + cfg(name).replace("\"", "") + "\""
 
 android {
     namespace = "com.docscanner.app"
@@ -16,6 +31,14 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
+
+        buildConfigField("String", "FIREBASE_API_KEY", quoted("FIREBASE_API_KEY"))
+        buildConfigField("String", "FIREBASE_APP_ID", quoted("FIREBASE_APP_ID"))
+        buildConfigField("String", "FIREBASE_PROJECT_ID", quoted("FIREBASE_PROJECT_ID"))
+        buildConfigField("String", "FIREBASE_STORAGE_BUCKET", quoted("FIREBASE_STORAGE_BUCKET"))
+        buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", quoted("GOOGLE_WEB_CLIENT_ID"))
+        buildConfigField("String", "FUNCTIONS_REGION", quoted("FUNCTIONS_REGION"))
+        buildConfigField("String", "PLAY_SUBSCRIPTION_ID", quoted("PLAY_SUBSCRIPTION_ID"))
         ndk {
             // Real phones only. The App Bundle splits per ABI so users download one copy of OpenCV.
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
@@ -85,6 +108,8 @@ dependencies {
     implementation(libs.camerax.camera2)
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
+    // CameraX APIs return ListenableFuture; Firebase pulls the empty listenablefuture stub, so Guava provides it.
+    implementation(libs.guava)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
@@ -96,6 +121,20 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.opencv)
     implementation(libs.androidx.exifinterface)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.functions)
+    implementation(libs.firebase.appcheck.playintegrity)
+    debugImplementation(libs.firebase.appcheck.debug)
+    implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services)
+    implementation(libs.googleid)
+    implementation(libs.billing.ktx)
+    implementation(libs.work.runtime.ktx)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

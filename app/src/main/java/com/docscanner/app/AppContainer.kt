@@ -2,6 +2,8 @@ package com.docscanner.app
 
 import android.app.ActivityManager
 import android.content.Context
+import com.docscanner.app.cloud.AuthRepository
+import com.docscanner.app.cloud.CloudServices
 import com.docscanner.app.data.DocumentRepository
 import com.docscanner.app.data.ExportRepository
 import com.docscanner.app.data.ImageLoader
@@ -43,4 +45,14 @@ class AppContainer(context: Context) {
     val settings by lazy { SettingsRepository(app) }
 
     val images by lazy { ImageLoader(blobs) }
+
+    /** null when this build has no Firebase configuration: every cloud feature then explains itself as off. */
+    val cloud: CloudServices? by lazy { CloudServices.create(app) }
+
+    val auth by lazy { AuthRepository(cloud) }
+
+    /** Signs out of Firebase and Google. Local documents stay on the phone. */
+    suspend fun signOut(context: Context) {
+        auth.signOut(context)
+    }
 }

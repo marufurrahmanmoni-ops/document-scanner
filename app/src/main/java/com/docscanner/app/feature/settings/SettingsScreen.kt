@@ -68,7 +68,7 @@ private data class Option<T>(val value: T, val label: Int)
 
 /** S19 Settings: every row here changes real behaviour. Sections arrive with their features. */
 @Composable
-fun SettingsScreen(contentPadding: PaddingValues) {
+fun SettingsScreen(contentPadding: PaddingValues, onOpenAccount: () -> Unit) {
     val container = LocalAppContainer.current
     val vm: SettingsViewModel = viewModel { SettingsViewModel(container) }
     val s by vm.settings.collectAsStateWithLifecycle()
@@ -86,6 +86,13 @@ fun SettingsScreen(contentPadding: PaddingValues) {
             stringResource(R.string.tab_settings),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(horizontal = Dimens.gutterCompact, vertical = Dimens.space4).semantics { heading() },
+        )
+
+        SectionHeader(stringResource(R.string.settings_account), Modifier.padding(horizontal = Dimens.gutterCompact))
+        ListItem(
+            headlineContent = { Text(stringResource(R.string.account_title)) },
+            supportingContent = { Text(stringResource(R.string.account_row_desc)) },
+            modifier = Modifier.clickable(role = Role.Button, onClick = onOpenAccount),
         )
 
         SectionHeader(stringResource(R.string.settings_scanning), Modifier.padding(horizontal = Dimens.gutterCompact))

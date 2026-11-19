@@ -15,6 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.docscanner.app.designsystem.theme.Motion
+import com.docscanner.app.feature.account.AccountScreen
 import com.docscanner.app.feature.camera.CameraScreen
 import com.docscanner.app.feature.document.DocumentScreen
 import com.docscanner.app.feature.editor.CropScreen
@@ -63,7 +64,10 @@ fun ScannerNavHost(nav: NavHostController = rememberNavController()) {
                 ToolsScreen(contentPadding = contentPadding, actions = actions)
             }
             composable<SettingsRoute> {
-                SettingsScreen(contentPadding = contentPadding)
+                SettingsScreen(contentPadding = contentPadding, onOpenAccount = actions::openAccount)
+            }
+            composable<AccountRoute> {
+                AccountScreen(onBack = actions::back)
             }
             composable<CameraRoute>(
                 enterTransition = { EnterTransition.None },
@@ -154,6 +158,10 @@ class NavActions(private val nav: NavHostController) {
         } else {
             openReview(outcome.docId)
         }
+    }
+
+    fun openAccount() {
+        nav.navigate(AccountRoute) { launchSingleTop = true }
     }
 
     fun back() {

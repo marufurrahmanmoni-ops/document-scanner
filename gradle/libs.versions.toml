@@ -18,6 +18,12 @@ datastore = "1.1.7"
 opencv = "4.12.0"
 exifinterface = "1.4.1"
 junit = "4.13.2"
+firebaseBom = "34.3.0"
+billing = "8.0.0"
+credentials = "1.5.0"
+googleid = "1.1.1"
+work = "2.10.5"
+guava = "33.4.8-android"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -49,6 +55,20 @@ datastore-preferences = { module = "androidx.datastore:datastore-preferences", v
 opencv = { module = "org.opencv:opencv", version.ref = "opencv" }
 androidx-exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" }
 junit = { module = "junit:junit", version.ref = "junit" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+firebase-storage = { module = "com.google.firebase:firebase-storage" }
+firebase-functions = { module = "com.google.firebase:firebase-functions" }
+firebase-appcheck-playintegrity = { module = "com.google.firebase:firebase-appcheck-playintegrity" }
+firebase-appcheck-debug = { module = "com.google.firebase:firebase-appcheck-debug" }
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutines" }
+billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
+credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
+credentials-play-services = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
