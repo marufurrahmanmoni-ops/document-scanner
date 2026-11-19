@@ -1,39 +1,39 @@
 feature,area,priority,original,clone,notes
-Open camera from home in one tap (centre FAB),capture,must,yes,partial,"[V:10] camera icon at bottom; screens S03 S07 | code done, awaiting first Gradle build + device test"
-Live document edge overlay on viewfinder,capture,must,yes,partial,"[V:6] [V:7] [V:15]; S07 | code done, awaiting first Gradle build + device test"
-Auto-capture when page is steady,capture,must,yes,partial,"[V:15]; S07; on by default in clone | code done, awaiting first Gradle build + device test; QuadTracker unit-tested"
-Manual shutter,capture,must,yes,partial,"[V:9] [V:10]; S07 | code done, awaiting first Gradle build + device test"
-Flash control (off/on/auto/torch),capture,must,yes,partial,"[V:11] flash mode button; S07 | code done, awaiting first Gradle build + device test"
-Camera permission denied state with recovery,capture,must,yes,partial,"[I] required by Android; S07 | code done, awaiting first Gradle build + device test; ask, denied, permanently denied -> Open settings, import instead"
-Single vs Batch capture mode,multi-page,must,yes,partial,"[V:9] [V:10] [V:11]; S07 | code done, awaiting first Gradle build + device test"
-Page counter thumbnail during batch,multi-page,must,yes,partial,"[I]; S07 | code done, awaiting first Gradle build + device test"
-Import images from gallery as scan,capture,must,yes,partial,"[V:12] gallery picker with Recents; S08 | code done, awaiting first Gradle build + device test; Photo Picker, EXIF orientation applied, metadata stripped"
-Automatic edge detection and crop,detection,must,yes,partial,"[V:1] smart cropping; [V:6] [V:7]; S09 | code done, awaiting first Gradle build + device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation); type-checked against OpenCV 4.12"
-Perspective correction (flatten tilted page),detection,must,yes,partial,"[V:16]; S09 | code done, awaiting first Gradle build + device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)"
-Manual crop with draggable corner handles,detection,must,yes,partial,"[V:9] [V:15]; S09 | code done, awaiting first Gradle build + device test"
-Fallback to full frame when no edges found,detection,must,yes,partial,"[I]; S09 | code done, awaiting first Gradle build + device test"
-Rotate page 90 degrees,detection,must,yes,partial,"[I]; S09 S13 | code done, awaiting first Gradle build + device test; on the Enhance screen"
-Original (no filter),enhance,must,yes,partial,"[V:8]; S10 | code done, awaiting first Gradle build + device test"
-Clean colour filter (whiten paper and boost ink),enhance,must,yes,partial,"[V:8] [V:9] the original calls it Magic Color; use your own name; S10 | code done, awaiting first Gradle build + device test; shadow test 181/234 -> 254/254; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)"
-Grayscale filter,enhance,must,yes,partial,"[V:8] [V:9]; S10 | code done, awaiting first Gradle build + device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)"
-Black and white filter,enhance,must,yes,partial,"[V:8] [V:9]; S10 | code done, awaiting first Gradle build + device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)"
-Review all pages before saving (batch),multi-page,must,yes,partial,"[I] implied by Complete step [V:10]; S11 | code done, awaiting first Gradle build + device test"
-Retake or delete a page,multi-page,must,yes,partial,"[I]; S11 | code done, awaiting first Gradle build + device test"
-Save multi-page PDF,pdf,must,yes,partial,"[V:1] [V:2]; S12 | code done, awaiting first Gradle build + device test; android.graphics.pdf.PdfDocument, page by page"
-Share via Android share sheet,export,must,yes,partial,"[V:1] email and social sharing; S16 | code done, awaiting first Gradle build + device test; FileProvider, single and multiple files"
-Document list with thumbnail page count and date,library,must,yes,partial,"[I]; S03 S04 | code done, awaiting first Gradle build + device test"
-Rename document (with auto-naming by date),library,must,yes,partial,"[I]; S12 | code done, awaiting first Gradle build + device test"
-Delete document with confirm or undo,library,should,yes,partial,"[I]; S04 S12 | code done, awaiting first Gradle build + device test; confirm + soft delete (30-day purge); no restore UI yet"
-Reorder pages by drag,multi-page,should,yes,partial,"[I]; S11 S14 | code done, awaiting first Gradle build + device test; Move earlier/later via fractional keys; drag not yet"
-Add pages to existing document,multi-page,should,yes,partial,"[I]; S12 | code done, awaiting first Gradle build + device test"
-Apply filter to all pages,enhance,should,yes,partial,"[I]; S10 | code done, awaiting first Gradle build + device test"
+Open camera from home in one tap (centre FAB),capture,must,yes,partial,[V:10] camera icon at bottom; screens S03 S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Live document edge overlay on viewfinder,capture,must,yes,partial,[V:6] [V:7] [V:15]; S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Auto-capture when page is steady,capture,must,yes,partial,[V:15]; S07; on by default in clone | compiles in Gradle debug build 2026-11-19; awaiting on-device test; QuadTracker unit-tested
+Manual shutter,capture,must,yes,partial,[V:9] [V:10]; S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Flash control (off/on/auto/torch),capture,must,yes,partial,[V:11] flash mode button; S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Camera permission denied state with recovery,capture,must,yes,partial,"[I] required by Android; S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; ask, denied, permanently denied -> Open settings, import instead"
+Single vs Batch capture mode,multi-page,must,yes,partial,[V:9] [V:10] [V:11]; S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Page counter thumbnail during batch,multi-page,must,yes,partial,[I]; S07 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Import images from gallery as scan,capture,must,yes,partial,"[V:12] gallery picker with Recents; S08 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; Photo Picker, EXIF orientation applied, metadata stripped"
+Automatic edge detection and crop,detection,must,yes,partial,[V:1] smart cropping; [V:6] [V:7]; S09 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation); type-checked against OpenCV 4.12
+Perspective correction (flatten tilted page),detection,must,yes,partial,[V:16]; S09 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)
+Manual crop with draggable corner handles,detection,must,yes,partial,[V:9] [V:15]; S09 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Fallback to full frame when no edges found,detection,must,yes,partial,[I]; S09 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Rotate page 90 degrees,detection,must,yes,partial,[I]; S09 S13 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; on the Enhance screen
+Original (no filter),enhance,must,yes,partial,[V:8]; S10 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Clean colour filter (whiten paper and boost ink),enhance,must,yes,partial,[V:8] [V:9] the original calls it Magic Color; use your own name; S10 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; shadow test 181/234 -> 254/254; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)
+Grayscale filter,enhance,must,yes,partial,[V:8] [V:9]; S10 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)
+Black and white filter,enhance,must,yes,partial,[V:8] [V:9]; S10 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; algorithm validated on 36+12 synthetic photos (tools/imaging-validation)
+Review all pages before saving (batch),multi-page,must,yes,partial,[I] implied by Complete step [V:10]; S11 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Retake or delete a page,multi-page,must,yes,partial,[I]; S11 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Save multi-page PDF,pdf,must,yes,partial,"[V:1] [V:2]; S12 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; android.graphics.pdf.PdfDocument, page by page"
+Share via Android share sheet,export,must,yes,partial,"[V:1] email and social sharing; S16 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; FileProvider, single and multiple files"
+Document list with thumbnail page count and date,library,must,yes,partial,[I]; S03 S04 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Rename document (with auto-naming by date),library,must,yes,partial,[I]; S12 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Delete document with confirm or undo,library,should,yes,partial,[I]; S04 S12 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; confirm + soft delete (30-day purge); no restore UI yet
+Reorder pages by drag,multi-page,should,yes,partial,[I]; S11 S14 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; Move earlier/later via fractional keys; drag not yet
+Add pages to existing document,multi-page,should,yes,partial,[I]; S12 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Apply filter to all pages,enhance,should,yes,partial,[I]; S10 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
 Brightness and contrast sliders,enhance,should,yes,no,[I]; S10
 Lighten filter,enhance,could,yes,no,[V:8] older version; S10
-Second B&W variant (alternate threshold),enhance,could,yes,partial,"[V:8] older version; S10 | code done, awaiting first Gradle build + device test; B&W soft"
-Magnifier loupe while dragging corners,detection,should,yes,partial,"[I]; S09 | code done, awaiting first Gradle build + device test"
-Save pages as JPG,export,should,yes,partial,"[V:1] [V:2]; S16 | code done, awaiting first Gradle build + device test; share or save to a picked folder"
-Export quality or file size option,export,should,yes,partial,"[V:17] adjustable quality; S16 | code done, awaiting first Gradle build + device test; Small/Balanced/Full"
-PDF page size setting (A4 Letter Auto),pdf,should,yes,partial,"[I]; S19 | code done, awaiting first Gradle build + device test; Fit/A4/Letter in sheet and Settings"
+Second B&W variant (alternate threshold),enhance,could,yes,partial,[V:8] older version; S10 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; B&W soft
+Magnifier loupe while dragging corners,detection,should,yes,partial,[I]; S09 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Save pages as JPG,export,should,yes,partial,[V:1] [V:2]; S16 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; share or save to a picked folder
+Export quality or file size option,export,should,yes,partial,[V:17] adjustable quality; S16 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; Small/Balanced/Full
+PDF page size setting (A4 Letter Auto),pdf,should,yes,partial,[I]; S19 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; Fit/A4/Letter in sheet and Settings
 OCR extract text from a page,ocr,should,yes,no,[V:1] [V:2]; S15
 Copy and share extracted text,ocr,should,yes,no,[V:1]; S15
 Export text as TXT,ocr,should,yes,no,[V:1] [V:2]; S15 S16
@@ -43,13 +43,13 @@ Searchable PDF with text layer,ocr,should,yes,no,[I]; S16
 Auto OCR on or off setting,ocr,should,yes,no,[V:2] users complained about forced Recognize Text; S19
 Folders,library,should,yes,no,[V:2] reviews mention folders; S04
 Move document between folders (reliable),library,should,yes,no,[V:2] review reports files lost when moving; S04
-Settings: default capture mode and default filter,settings,should,yes,partial,"[V:15]; S19 | code done, awaiting first Gradle build + device test"
-Settings: auto-capture and auto-crop toggles,settings,should,yes,partial,"[V:15] auto-capture; [I] auto-crop toggle; S19 | code done, awaiting first Gradle build + device test; auto-capture yes; auto-crop toggle not yet"
+Settings: default capture mode and default filter,settings,should,yes,partial,[V:15]; S19 | compiles in Gradle debug build 2026-11-19; awaiting on-device test
+Settings: auto-capture and auto-crop toggles,settings,should,yes,partial,[V:15] auto-capture; [I] auto-crop toggle; S19 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; auto-capture yes; auto-crop toggle not yet
 Print via Android print service,export,should,yes,no,[V:1]; S21
-No watermark on free exports,monetisation,should,no,partial,"[V:4] [V:9] [V:13] original watermarks free exports; clone differentiator | code done, awaiting first Gradle build + device test; nothing is ever drawn on exports"
+No watermark on free exports,monetisation,should,no,partial,[V:4] [V:9] [V:13] original watermarks free exports; clone differentiator | compiles in Gradle debug build 2026-11-19; awaiting on-device test; nothing is ever drawn on exports
 OCR language selection,ocr,could,yes,no,[I]; S15 S19
 Tags,library,could,yes,no,[V:1] [V:5]; S04
-Sort and grid or list view,library,could,yes,partial,"[I]; S04 | code done, awaiting first Gradle build + device test; sort by date/name; grid only"
+Sort and grid or list view,library,could,yes,partial,[I]; S04 | compiles in Gradle debug build 2026-11-19; awaiting on-device test; sort by date/name; grid only
 Multi-select move delete merge share,library,could,yes,no,[I]; S04
 ID card mode (front and back on one page),capture,could,yes,no,[V:5] [V:10]; S22
 QR code scanning mode,capture,could,yes,no,[V:2]; S07

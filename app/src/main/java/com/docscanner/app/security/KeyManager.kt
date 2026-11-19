@@ -2,9 +2,11 @@ package com.docscanner.app.security
 
 import android.content.Context
 import android.util.Base64
+import androidx.core.content.edit
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.KeyTemplates
 import com.google.crypto.tink.KeysetHandle
+import com.google.crypto.tink.RegistryConfiguration
 import com.google.crypto.tink.StreamingAead
 import com.google.crypto.tink.aead.AeadConfig
 import com.google.crypto.tink.integration.android.AndroidKeysetManager
@@ -26,11 +28,11 @@ class KeyManager(private val context: Context) {
     }
 
     val streamingAead: StreamingAead by lazy {
-        keyset(BLOB_KEYSET, "AES256_GCM_HKDF_1MB").getPrimitive(StreamingAead::class.java)
+        keyset(BLOB_KEYSET, "AES256_GCM_HKDF_1MB").getPrimitive(RegistryConfiguration.get(), StreamingAead::class.java)
     }
 
     private val metaAead: Aead by lazy {
-        keyset(META_KEYSET, "AES256_GCM").getPrimitive(Aead::class.java)
+        keyset(META_KEYSET, "AES256_GCM").getPrimitive(RegistryConfiguration.get(), Aead::class.java)
     }
 
     private fun keyset(name: String, template: String): KeysetHandle =
@@ -50,7 +52,8 @@ class KeyManager(private val context: Context) {
         }
         val pass = ByteArray(32).also { SecureRandom().nextBytes(it) }
         val enc = metaAead.encrypt(pass, DB_PASS_AD)
-        prefs.edit().putString(DB_PASS_KEY, Base64.encodeToString(enc, Base64.NO_WRAP)).commit()
+        // commit = true: the passphrase must be on disk before the database file is created with it.
+        prefs.edit(commit = true) { putString(DB_PASS_KEY, Base64.encodeToString(enc, Base64.NO_WRAP)) }
         return pass
     }
 

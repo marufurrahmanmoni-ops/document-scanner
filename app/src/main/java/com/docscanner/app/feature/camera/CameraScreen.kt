@@ -1,6 +1,7 @@
 package com.docscanner.app.feature.camera
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -109,6 +110,8 @@ import com.docscanner.app.navigation.NavActions
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+/** Portrait lock is deliberate while scanning (screens.md S07). */
+@SuppressLint("SourceLockedOrientationActivity")
 /** S07 + S07a: live preview with edge overlay, auto-capture, single/batch, gallery import, permission states. */
 @Composable
 fun CameraScreen(route: CameraRoute, actions: NavActions) {

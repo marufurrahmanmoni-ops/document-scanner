@@ -1,0 +1,474 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b82127ddb55cbe43bb2ac3af3cf16732",
+    "entities": [
+      {
+        "tableName": "documents",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `owner_id` TEXT NOT NULL, `folder_id` TEXT, `title` TEXT NOT NULL, `status` TEXT NOT NULL, `page_count` INTEGER NOT NULL, `cover_page_id` TEXT, `total_bytes` INTEGER NOT NULL, `ocr_state` TEXT NOT NULL, `is_locked` INTEGER NOT NULL, `default_filter` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, `opened_at` INTEGER, `deleted_at` INTEGER, `version` INTEGER NOT NULL, `server_rev` INTEGER, `sync_state` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ownerId",
+            "columnName": "owner_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "folderId",
+            "columnName": "folder_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pageCount",
+            "columnName": "page_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coverPageId",
+            "columnName": "cover_page_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "totalBytes",
+            "columnName": "total_bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ocrState",
+            "columnName": "ocr_state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isLocked",
+            "columnName": "is_locked",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "defaultFilter",
+            "columnName": "default_filter",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "openedAt",
+            "columnName": "opened_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "deletedAt",
+            "columnName": "deleted_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serverRev",
+            "columnName": "server_rev",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "syncState",
+            "columnName": "sync_state",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_documents_owner_id_deleted_at_status_updated_at",
+            "unique": false,
+            "columnNames": [
+              "owner_id",
+              "deleted_at",
+              "status",
+              "updated_at"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_documents_owner_id_deleted_at_status_updated_at` ON `${TABLE_NAME}` (`owner_id`, `deleted_at`, `status`, `updated_at`)"
+          },
+          {
+            "name": "index_documents_owner_id_deleted_at_opened_at",
+            "unique": false,
+            "columnNames": [
+              "owner_id",
+              "deleted_at",
+              "opened_at"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_documents_owner_id_deleted_at_opened_at` ON `${TABLE_NAME}` (`owner_id`, `deleted_at`, `opened_at`)"
+          },
+          {
+            "name": "index_documents_owner_id_title",
+            "unique": false,
+            "columnNames": [
+              "owner_id",
+              "title"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_documents_owner_id_title` ON `${TABLE_NAME}` (`owner_id`, `title`)"
+          }
+        ]
+      },
+      {
+        "tableName": "pages",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `owner_id` TEXT NOT NULL, `document_id` TEXT NOT NULL, `order_key` TEXT NOT NULL, `original_path` TEXT NOT NULL, `original_sha256` TEXT NOT NULL, `original_width` INTEGER NOT NULL, `original_height` INTEGER NOT NULL, `source_rotation` INTEGER NOT NULL, `source` TEXT NOT NULL, `quad` TEXT, `quad_source` TEXT NOT NULL, `rotation` INTEGER NOT NULL, `filter` TEXT NOT NULL, `brightness` INTEGER NOT NULL, `contrast` INTEGER NOT NULL, `recipe_version` INTEGER NOT NULL, `processed_path` TEXT, `processed_sha256` TEXT, `processed_width` INTEGER, `processed_height` INTEGER, `processed_bytes` INTEGER, `render_state` TEXT NOT NULL, `thumb_path` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, `deleted_at` INTEGER, `version` INTEGER NOT NULL, `server_rev` INTEGER, `sync_state` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`document_id`) REFERENCES `documents`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ownerId",
+            "columnName": "owner_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "documentId",
+            "columnName": "document_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderKey",
+            "columnName": "order_key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalPath",
+            "columnName": "original_path",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalSha",
+            "columnName": "original_sha256",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalWidth",
+            "columnName": "original_width",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalHeight",
+            "columnName": "original_height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceRotation",
+            "columnName": "source_rotation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quad",
+            "columnName": "quad",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "quadSource",
+            "columnName": "quad_source",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rotation",
+            "columnName": "rotation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "filter",
+            "columnName": "filter",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "brightness",
+            "columnName": "brightness",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contrast",
+            "columnName": "contrast",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recipeVersion",
+            "columnName": "recipe_version",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "processedPath",
+            "columnName": "processed_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "processedSha",
+            "columnName": "processed_sha256",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "processedWidth",
+            "columnName": "processed_width",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "processedHeight",
+            "columnName": "processed_height",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "processedBytes",
+            "columnName": "processed_bytes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "renderState",
+            "columnName": "render_state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thumbPath",
+            "columnName": "thumb_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deletedAt",
+            "columnName": "deleted_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serverRev",
+            "columnName": "server_rev",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "syncState",
+            "columnName": "sync_state",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_pages_document_id",
+            "unique": false,
+            "columnNames": [
+              "document_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_pages_document_id` ON `${TABLE_NAME}` (`document_id`)"
+          },
+          {
+            "name": "index_pages_render_state",
+            "unique": false,
+            "columnNames": [
+              "render_state"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_pages_render_state` ON `${TABLE_NAME}` (`render_state`)"
+          },
+          {
+            "name": "index_pages_original_sha256",
+            "unique": false,
+            "columnNames": [
+              "original_sha256"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_pages_original_sha256` ON `${TABLE_NAME}` (`original_sha256`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "documents",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "document_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "sync_outbox",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`seq` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `owner_id` TEXT NOT NULL, `entity` TEXT NOT NULL, `entity_id` TEXT NOT NULL, `op` TEXT NOT NULL, `entity_version` INTEGER NOT NULL, `changed_fields` TEXT, `blob_sha256` TEXT, `created_at` INTEGER NOT NULL, `attempts` INTEGER NOT NULL, `last_error` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "seq",
+            "columnName": "seq",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ownerId",
+            "columnName": "owner_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entity",
+            "columnName": "entity",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entityId",
+            "columnName": "entity_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "op",
+            "columnName": "op",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entityVersion",
+            "columnName": "entity_version",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "changedFields",
+            "columnName": "changed_fields",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "blobSha",
+            "columnName": "blob_sha256",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attempts",
+            "columnName": "attempts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastError",
+            "columnName": "last_error",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "seq"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_sync_outbox_entity_entity_id",
+            "unique": false,
+            "columnNames": [
+              "entity",
+              "entity_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sync_outbox_entity_entity_id` ON `${TABLE_NAME}` (`entity`, `entity_id`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b82127ddb55cbe43bb2ac3af3cf16732')"
+    ]
+  }
+}

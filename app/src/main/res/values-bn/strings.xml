@@ -70,7 +70,7 @@
     <string name="take_photo">ছবি তুলুন</string>
     <string name="import_photos">ছবি ইমপোর্ট</string>
     <string name="saving_page">পাতা সেভ হচ্ছে…</string>
-    <string name="review_pages_a11y">%1$d টি পাতা দেখুন</string>
+    <string name="review_pages_a11y">স্ক্যান করা পাতা দেখুন (%1$d)</string>
     <string name="camera_unavailable">ক্যামেরা চালু হয়নি। অন্য ক্যামেরা অ্যাপ বন্ধ করে আবার চেষ্টা করুন।</string>
     <string name="camera_permission_title">স্ক্যান করতে ক্যামেরার অনুমতি লাগবে</string>
     <string name="camera_permission_body">পাতাগুলো আপনার ক্যামেরায় তোলা হয় এবং এই ফোনের বাইরে যায় না।</string>
@@ -93,7 +93,7 @@
     <string name="back_to_crop">কিনারায় ফিরুন</string>
     <string name="rotate">ঘোরান</string>
     <string name="page_preview">পাতার প্রিভিউ</string>
-    <string name="apply_to_all">সব %1$d টি পাতায় ব্যবহার করুন</string>
+    <string name="apply_to_all">সব পাতায় ব্যবহার করুন (%1$d)</string>
     <string name="filter_original">মূল</string>
     <string name="filter_auto">অটো</string>
     <string name="filter_clean">পরিষ্কার</string>
@@ -166,7 +166,7 @@
         <item quantity="other">%1$d টি পাতা</item>
     </plurals>
     <plurals name="discard_body">
-        <item quantity="one">আপনার স্ক্যান করা পাতাটি মুছে যাবে।</item>
+        <item quantity="one">আপনার স্ক্যান করা %1$d টি পাতা মুছে যাবে।</item>
         <item quantity="other">আপনার স্ক্যান করা %1$d টি পাতা মুছে যাবে।</item>
     </plurals>
 </resources>

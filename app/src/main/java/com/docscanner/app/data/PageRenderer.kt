@@ -1,6 +1,7 @@
 package com.docscanner.app.data
 
 import android.graphics.Bitmap
+import androidx.core.graphics.scale
 import com.docscanner.app.imaging.FilterEngine
 import com.docscanner.app.imaging.ImageOps
 import com.docscanner.app.model.Filter
@@ -49,7 +50,7 @@ class PageRenderer(private val blobs: BlobStore) {
         if (rotated !== decoded) decoded.recycle()
         val scale = longEdge.toFloat() / maxOf(rotated.width, rotated.height)
         if (scale >= 1f) return rotated
-        val scaled = Bitmap.createScaledBitmap(rotated, (rotated.width * scale).toInt(), (rotated.height * scale).toInt(), true)
+        val scaled = rotated.scale((rotated.width * scale).toInt(), (rotated.height * scale).toInt())
         if (scaled !== rotated) rotated.recycle()
         return scaled
     }

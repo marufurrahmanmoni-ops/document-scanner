@@ -3,7 +3,41 @@
 App: DocScanner (`com.docscanner.app`), native Android, Kotlin + Compose.
 Scope of this pass: the 12-item core loop requested on 2026-11-19, i.e. milestones M1 + M2 of `architecture.md`.
 
-## Build status: NOT YET COMPILED WITH GRADLE
+## Build status: DEBUG BUILD SUCCEEDS (verified 2026-11-19 19:30)
+
+First real Gradle build, run after the build hosts were allowed (all six returned HTTP 200).
+
+| step | result |
+| --- | --- |
+| Android SDK | installed: cmdline-tools, platforms;android-36, build-tools 35.0.0 + 36.1.0, platform-tools 37.0.1, at `/opt/android-sdk` |
+| Dependency versions | every version in `gradle/libs.versions.toml` exists on Google Maven / Maven Central / the plugin portal. **Kept as pinned, no upgrades** |
+| Gradle 8.14.3 (wrapper) + AGP 8.11.1 + Kotlin 2.2.0 + KSP | configuration + sync OK |
+| `:app:assembleDebug` | **BUILD SUCCESSFUL**. `kspDebugKotlin` (Room) and `compileDebugKotlin` ran with **0 errors**, 0 Kotlin warnings after fixes |
+| `:app:testDebugUnitTest` | **10/10 pass**, 0 failures (OrderKey, Quad, QuadTracker, UuidV7, file names) |
+| `:app:lintDebug` | **0 errors**. 24 warnings: 23 are "newer version available", 1 is a deliberate `mipmap-anydpi-v26` folder |
+| 16 KB page size (Play requirement) | all 14 arm64-v8a + x86_64 `.so` files have LOAD alignment 16384, incl. OpenCV 4.12 and SQLCipher 4.9 |
+| Imaging validation tools | 36/36, near-white 12/12, 0/10 false positives, filters 181/234 → 254/254 |
+
+**APK:** `app/build/outputs/apk/debug/app-debug.apk` (136 MB: 3 ABIs, full OpenCV, no shrinking. The release build with
+R8 + per-ABI App Bundle will be far smaller).
+
+**Not verified:** the app has **not been run on a device or emulator**. This workspace has no KVM, so no emulator can run.
+Camera, crop, filters, PDF export and encryption are compiled but untested at runtime. Every feature therefore stays
+`partial` in features.csv until it is exercised on a real phone.
+
+### Fixes made in this build session (real errors only)
+
+1. `jvmToolchain(17)` demanded a JDK 17 that is not installed (only JDK 21), so the build failed configuring `compileDebugJavaWithJavac`.
+   → Replaced with `compilerOptions.jvmTarget = JVM_17` (same bytecode, any JDK ≥ 17 builds).
+2. Lint error `ImpliedQuantity`: in Bengali the plural "one" covers 0 and 1, so the message must include the number.
+   → `values-bn` `discard_body` now shows `%1$d`.
+3. Warnings cleaned: deprecated `RotateRight` icon → AutoMirrored; Tink `getPrimitive(Class)` →
+   `getPrimitive(RegistryConfiguration.get(), Class)`; KTX `createBitmap`, `scale`, `SharedPreferences.edit(commit = true)`;
+   two "%d pages" strings reworded; deliberate portrait lock annotated.
+4. Build environment, not code: the proxy throttles parallel downloads (HTTP 429), so builds run with `--max-workers=2`.
+
+### Earlier status (before host access)
+
 
 **Blocker:** this cloud workspace cannot reach the hosts an Android build needs. Every request to
 `dl.google.com`, `maven.google.com`, `repo1.maven.org`, `repo.maven.apache.org` and `plugins.gradle.org`
@@ -22,15 +56,14 @@ What WAS verified without those hosts:
 | Schema | `replica/schema.sql` in SQLite | loads; duplicate page order rejected; Bengali + English FTS match |
 | String resources | script | every `R.string` used is defined in `values/` and `values-bn/` |
 
-**To build** (on a machine with Android Studio, or here once the hosts are allowed):
+**To build:**
 
 ```bash
 ./gradlew :app:assembleDebug        # APK in app/build/outputs/apk/debug/
 ./gradlew :app:testDebugUnitTest    # JVM unit tests
 ```
 
-The first build is expected to surface some compile errors in the Compose/Room/CameraX/Tink code that could not be
-type-checked here. The next session with build access should run the build, fix them, and update this log.
+(The first build did surface errors, but only build configuration, not code. See the fixes above.)
 
 ## Screens
 
@@ -76,6 +109,6 @@ type-checked here. The next session with build access should run the build, fix 
 
 ## Next
 
-1. Run the Gradle build with host access, fix compile errors, and install on a real phone (one low-end, one mid-range).
+1. Install `app-debug.apk` on a real phone (one low-end, one mid-range) and run flows F01–F03. Record crashes here.
 2. Calibrate `QuadTracker.minSharpness` on real devices (25 is a guess).
 3. Run `/replica-test` on F01–F03, then M3: OCR (Tesseract eng+ben), search, folders.

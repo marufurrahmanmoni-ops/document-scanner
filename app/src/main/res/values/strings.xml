@@ -75,7 +75,7 @@
     <string name="take_photo">Take photo</string>
     <string name="import_photos">Import photos</string>
     <string name="saving_page">Saving page…</string>
-    <string name="review_pages_a11y">Review %1$d pages</string>
+    <string name="review_pages_a11y">Review scanned pages (%1$d)</string>
     <string name="camera_unavailable">The camera couldn\'t start. Close other camera apps and try again.</string>
     <string name="camera_permission_title">Camera access is needed to scan</string>
     <string name="camera_permission_body">Pages are captured with your camera and never leave this phone.</string>
@@ -100,7 +100,7 @@
     <string name="back_to_crop">Back to edges</string>
     <string name="rotate">Rotate</string>
     <string name="page_preview">Page preview</string>
-    <string name="apply_to_all">Use for all %1$d pages</string>
+    <string name="apply_to_all">Use on every page (%1$d)</string>
     <string name="filter_original">Original</string>
     <string name="filter_auto">Auto</string>
     <string name="filter_clean">Clean</string>

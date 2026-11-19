@@ -2,6 +2,7 @@ package com.docscanner.app.imaging
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.core.graphics.createBitmap
 import com.docscanner.app.model.Quad
 import org.opencv.android.Utils
 import org.opencv.core.Core
@@ -64,7 +65,7 @@ object ImageOps {
 
     /** 1- or 3-channel Mat to an ARGB_8888 bitmap. */
     fun toBitmap(mat: Mat): Bitmap {
-        val bmp = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888)
+        val bmp = createBitmap(mat.cols(), mat.rows())
         Utils.matToBitmap(mat, bmp)
         return bmp
     }

@@ -53,7 +53,10 @@ android {
 }
 
 kotlin {
-    jvmToolchain(17)
+    // Bytecode target 17; any installed JDK >= 17 can build (no fixed toolchain download).
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
 
 ksp {

@@ -19,7 +19,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.RotateRight
+import androidx.compose.material.icons.automirrored.rounded.RotateRight
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -178,7 +178,7 @@ fun EnhanceScreen(route: EnhanceRoute, actions: NavActions) {
             }
             Text(stringResource(R.string.enhance), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
             IconButton(onClick = vm::rotate) {
-                Icon(Icons.Rounded.RotateRight, contentDescription = stringResource(R.string.rotate))
+                Icon(Icons.AutoMirrored.Rounded.RotateRight, contentDescription = stringResource(R.string.rotate))
             }
         }
 
