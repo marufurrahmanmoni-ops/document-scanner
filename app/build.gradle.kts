@@ -44,7 +44,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.docscanner.app"
+        applicationId = "io.github.marufurrahmanmoni_ops.docscanner"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

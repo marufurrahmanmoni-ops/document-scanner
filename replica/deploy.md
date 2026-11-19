@@ -16,12 +16,12 @@ own upload key and have settled the application ID.
 | 2 | Critical tests passing | ⚠ **every test that can run here passes**; 24 cannot run here | JVM 35/35 · Firestore rules 11/11 · Functions 8/8 · lint 0 errors. Not run: 17 Robolectric, 7 instrumented (`test-plan.md`). |
 | 3 | No critical security issues | ✓ no open S1/S2 | BUG-001 (S1) fixed. Secret scan of tracked files: clean. No keystore/env/local.properties tracked. `allowBackup=false`; DB is SQLCipher; blobs are Tink-encrypted; FileProvider not exported; only the launcher activity is exported; no cleartext traffic (target 36 default). |
 | 4 | No original branding | ✓ code sweep clean, ⚠ name not cleared | `CamScanner|intsig|Magic Colo(u)r` in `app/` + `firebase/`: 0 matches. The icon and strings are original. **"DocScanner" is a generic name and is probably taken on Play; `/replica-brand` (name, trademark check) has not run.** |
-| 5 | Correct application ID | ✗ **decision needed** | Currently `com.docscanner.app`. Use a reverse domain you control, e.g. `io.github.marufurrahmanmoni_ops.docscanner`. It can **never change after the first upload**. |
+| 5 | Correct application ID | ✓ | `io.github.marufurrahmanmoni_ops.docscanner` (chosen by the owner 2026-11-20). Kotlin package stays `com.docscanner.app` (internal only). Permanent after the first upload. |
 | 6 | Release signing | ✓ pipeline, ✗ your key | Reads `keystore.properties` (git-ignored) or `SIGNING_*` env vars. Verified with a throwaway key kept outside the repo: `apksigner verify` OK, AAB `jarsigner` OK. **Your upload key does not exist yet.** |
 | 7 | R8 / ProGuard | ✓ builds, ⚠ runtime unverified | `isMinifyEnabled` + `isShrinkResources`. Keep rules for OpenCV JNI, SQLCipher, Tink protos and serializable routes. No missing-class errors. A minified build can still fail at runtime through reflection, so **run the release APK on a phone** (scan, save, share, sign in). |
 | 8 | Permissions and privacy | ✓ reviewed, ✗ privacy policy not hosted | See the table below. Draft policy: `replica/launch/privacy-policy.md`. |
 | 9 | Play compliance | ⚠ see the checklist | target SDK 36 meets the current rule; 16 KB pages OK; Billing 8; in-app account deletion. Still to do: the hosted deletion URL, Data safety and the other forms below. |
-| 10 | Release build verification | ✓ | `bundleRelease` and `assembleRelease` succeed; the release APK is 16 KB-aligned (`zipalign -c -P 16`); `aapt2 badging` shows `com.docscanner.app` 1 / 0.1.0, targetSdk 36. |
+| 10 | Release build verification | ✓ | `bundleRelease` and `assembleRelease` succeed; the release APK is 16 KB-aligned (`zipalign -c -P 16`); `aapt2 badging` shows `io.github.marufurrahmanmoni_ops.docscanner` 1 / 0.1.0, targetSdk 36. |
 
 ## Artifacts (in `dist/`, not committed)
 
@@ -63,7 +63,8 @@ No storage or media permissions: gallery import uses the system photo picker.
 
 **Account and app**
 - [ ] Play developer account ($25 once), identity verified.
-- [ ] Decide the application ID (row 5) and an app name you have cleared (row 4).
+- [x] Application ID: `io.github.marufurrahmanmoni_ops.docscanner`.
+- [ ] An app name you have cleared (row 4).
 - [ ] If your account is **personal and created after 13 Nov 2023**: a **closed test with at least 12 testers, opted in for 14 continuous days**, before you can apply for production. Internal testing does not count. Plan for this; it is the longest step.
 
 **Signing**

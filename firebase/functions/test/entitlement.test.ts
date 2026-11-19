@@ -60,8 +60,8 @@ test('callable input is validated', () => {
 });
 
 test('RTDN payloads for other apps are ignored', () => {
-  const msg = { packageName: 'com.docscanner.app', subscriptionNotification: { purchaseToken: 'tok' } };
-  assert.equal(tokenFromRtdn(msg, 'com.docscanner.app'), 'tok');
+  const msg = { packageName: 'io.github.marufurrahmanmoni_ops.docscanner', subscriptionNotification: { purchaseToken: 'tok' } };
+  assert.equal(tokenFromRtdn(msg, 'io.github.marufurrahmanmoni_ops.docscanner'), 'tok');
   assert.equal(tokenFromRtdn(msg, 'com.other.app'), null);
-  assert.equal(tokenFromRtdn({ packageName: 'com.docscanner.app', testNotification: {} }, 'com.docscanner.app'), null);
+  assert.equal(tokenFromRtdn({ packageName: 'io.github.marufurrahmanmoni_ops.docscanner', testNotification: {} }, 'io.github.marufurrahmanmoni_ops.docscanner'), null);
 });

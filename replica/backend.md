@@ -126,7 +126,7 @@ Cloud Functions read **`firebase/functions/.env`** (git-ignored). Template: `.en
 
 | variable | meaning |
 | --- | --- |
-| `PLAY_PACKAGE_NAME` | `com.docscanner.app` (or the final application id after `/replica-brand`) |
+| `PLAY_PACKAGE_NAME` | `io.github.marufurrahmanmoni_ops.docscanner` |
 | `PLAY_SUBSCRIPTION_IDS` | comma-separated product ids that grant premium |
 | `FUNCTIONS_REGION` | must match the app's `FUNCTIONS_REGION` |
 
@@ -135,7 +135,7 @@ is stored anywhere:** functions use their runtime service account.
 
 ## What you must create (Claude cannot create accounts or keys)
 
-1. **Firebase project** (console.firebase.google.com). Add an Android app with package `com.docscanner.app` and copy the values
+1. **Firebase project** (console.firebase.google.com). Add an Android app with package `io.github.marufurrahmanmoni_ops.docscanner` and copy the values
    above into `local.properties`. Register the **SHA-1 and SHA-256** of the debug keystore and the Play app-signing key (needed for
    Google sign-in and App Check).
 2. **Authentication:** enable Email/Password and Google. Customise the verification email sender and template in your own words.

@@ -31,7 +31,7 @@ To run what could not run here, on your computer with a phone plugged in (USB de
 
 ```bash
 ./gradlew :app:testDebugUnitTest -Probolectric=true      # +17 data-layer tests
-adb shell pm clear com.docscanner.app
+adb shell pm clear io.github.marufurrahmanmoni_ops.docscanner
 ./gradlew :app:connectedDebugAndroidTest                  # 7 instrumented tests
 ```
 

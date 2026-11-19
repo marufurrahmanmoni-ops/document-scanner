@@ -17,7 +17,7 @@ import {
 initializeApp();
 
 // ---- configuration (set in functions/.env, see .env.example; never commit real values)
-const PACKAGE_NAME = defineString('PLAY_PACKAGE_NAME', { default: 'com.docscanner.app' });
+const PACKAGE_NAME = defineString('PLAY_PACKAGE_NAME', { default: 'io.github.marufurrahmanmoni_ops.docscanner' });
 const SUBSCRIPTION_IDS = defineString('PLAY_SUBSCRIPTION_IDS', { description: 'Comma-separated Play subscription product ids' });
 const REGION = defineString('FUNCTIONS_REGION', { default: 'us-central1' });
 

@@ -1,6 +1,6 @@
 # Build log
 
-App: DocScanner (`com.docscanner.app`), native Android, Kotlin + Compose.
+App: DocScanner (application ID `io.github.marufurrahmanmoni_ops.docscanner`, Kotlin package `com.docscanner.app`), native Android, Kotlin + Compose.
 Scope of this pass: the 12-item core loop requested on 2026-11-19, i.e. milestones M1 + M2 of `architecture.md`.
 
 ## Build status: DEBUG BUILD SUCCEEDS (verified 2026-11-19 19:30)
