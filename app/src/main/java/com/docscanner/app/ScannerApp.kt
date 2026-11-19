@@ -16,6 +16,7 @@ class ScannerApp : Application() {
             Log.e(TAG, "OpenCV native library failed to load")
         }
         container = AppContainer(this)
+        container.wireSync()
         container.appScope.launch {
             runCatching {
                 container.exports.cleanup()

@@ -212,6 +212,42 @@
     <string name="err_recent_login">For your security, sign in again first.</string>
     <string name="err_unknown">Something went wrong. Try again.</string>
 
+    <!-- Backup (B3) -->
+    <string name="backup_title">Encrypted backup</string>
+    <string name="backup_explainer">Keep an encrypted copy of your documents in your account and get them back on a new phone. Your files are locked with a passphrase only you know before they leave this phone.</string>
+    <string name="backup_need_verify">Confirm your email address first, then you can turn on backup.</string>
+    <string name="backup_checking">Checking your account…</string>
+    <string name="try_again">Try again</string>
+    <string name="ok">OK</string>
+    <string name="backup_turn_on">Turn on backup</string>
+    <string name="backup_consent_title">Back up your documents?</string>
+    <string name="backup_consent_body">Every saved document on this phone (pages, names and edits) will be encrypted here, then uploaded to cloud storage in your account. The passphrase never leaves this phone, so nobody else, including us, can open your backup. You can pause backup at any time.</string>
+    <string name="backup_consent_check">I agree to upload encrypted copies of my documents</string>
+    <string name="backup_new_pass">New backup passphrase</string>
+    <string name="backup_enter_pass">Your backup passphrase</string>
+    <string name="backup_confirm_pass">Type it again</string>
+    <string name="backup_pass_rule">At least 10 characters. A short sentence works well.</string>
+    <string name="backup_pass_warning">Write it down. If you forget it, your backup can\'t be opened, not even by us.</string>
+    <string name="backup_wrong_pass">That passphrase doesn\'t open this backup.</string>
+    <string name="backup_err_generic">Backup couldn\'t finish. Check your connection and try again.</string>
+    <string name="backup_restoring">Bringing your documents back…</string>
+    <string name="backup_paused">Backup paused. Your cloud copy is kept.</string>
+    <string name="backup_on">Backup is on</string>
+    <string name="backup_syncing">Syncing…</string>
+    <string name="backup_never">Not synced yet</string>
+    <string name="backup_last">Last synced %1$s</string>
+    <string name="backup_pending">%1$d waiting</string>
+    <string name="backup_wifi_only">Only on Wi-Fi</string>
+    <string name="backup_last_error">Last problem: %1$s</string>
+    <string name="backup_conflicts">Edits made on two phones at once: %1$d kept the newer version.</string>
+    <string name="backup_sync_now">Sync now</string>
+    <string name="backup_restore">Restore all</string>
+    <string name="backup_change_pass">Change backup passphrase</string>
+    <string name="backup_pass_changed">Passphrase changed. Use the new one on other phones.</string>
+    <string name="backup_synced">Everything is up to date</string>
+    <string name="backup_synced_conflicts">Synced. Some edits from another phone were newer.</string>
+    <string name="backup_wrong_account">This phone is backing up a different account. Sign out and in again.</string>
+
     <plurals name="pages">
         <item quantity="one">%1$d page</item>
         <item quantity="other">%1$d pages</item>

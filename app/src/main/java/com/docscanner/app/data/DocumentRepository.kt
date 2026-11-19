@@ -46,6 +46,9 @@ class DocumentRepository(
     private val appScope: CoroutineScope,
     lowRamDevice: Boolean,
 ) {
+    /** Called after every change that was written to the outbox (the sync scheduler listens). */
+    var onLocalChange: (() -> Unit)? = null
+
     private val docs = db.documents()
     private val pages = db.pages()
     private val outbox = db.outbox()
@@ -463,6 +466,7 @@ class DocumentRepository(
         outbox.insert(
             OutboxEntity(entity = entity, entityId = id, op = op, entityVersion = version, blobSha = blobSha, createdAt = now),
         )
+        onLocalChange?.invoke()
     }
 
     private fun DocumentListRow.toSummary() = DocumentSummary(

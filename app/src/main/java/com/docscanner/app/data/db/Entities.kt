@@ -104,6 +104,23 @@ data class OutboxEntity(
     @ColumnInfo(name = "last_error") val lastError: String? = null,
 )
 
+/** Last state both this phone and the cloud agreed on, per record: the base of the 3-way merge (SyncMerge). */
+@Entity(tableName = "sync_shadow", primaryKeys = ["entity", "entity_id"])
+data class SyncShadowEntity(
+    val entity: String,
+    @ColumnInfo(name = "entity_id") val entityId: String,
+    /** Plain JSON of the agreed record (stays inside the encrypted database). */
+    val payload: ByteArray,
+    @ColumnInfo(name = "remote_rev") val remoteRev: Long,
+)
+
+/** One pending record in the outbox: the newest change for (entity, id). */
+data class OutboxGroup(
+    val entity: String,
+    @ColumnInfo(name = "entity_id") val entityId: String,
+    @ColumnInfo(name = "max_seq") val maxSeq: Long,
+)
+
 /** Row for list screens: a document plus its cover thumbnail. */
 data class DocumentListRow(
     val id: String,

@@ -3,7 +3,6 @@ package com.docscanner.app.feature.account
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -109,7 +108,7 @@ fun errorText(e: AuthError): Int = when (e) {
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountScreen(onBack: () -> Unit, extraSections: @Composable ColumnScope.(Account) -> Unit = {}) {
+fun AccountScreen(onBack: () -> Unit) {
     val container = LocalAppContainer.current
     val vm: AccountViewModel = viewModel { AccountViewModel(container) }
     val account by vm.account.collectAsStateWithLifecycle()
@@ -148,7 +147,7 @@ fun AccountScreen(onBack: () -> Unit, extraSections: @Composable ColumnScope.(Ac
                     acc == null -> SignedOut(vm, busy)
                     else -> {
                         SignedIn(vm, acc, busy)
-                        extraSections(acc)
+                        BackupSection(acc) { snackbar.showSnackbar(context.getString(it)) }
                     }
                 }
             }

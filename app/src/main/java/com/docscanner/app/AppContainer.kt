@@ -4,6 +4,11 @@ import android.app.ActivityManager
 import android.content.Context
 import com.docscanner.app.cloud.AuthRepository
 import com.docscanner.app.cloud.CloudServices
+import com.docscanner.app.cloud.sync.SyncEngine
+import com.docscanner.app.cloud.sync.SyncScheduler
+import com.docscanner.app.cloud.sync.SyncSettings
+import com.docscanner.app.cloud.sync.VaultRepository
+import kotlinx.coroutines.launch
 import com.docscanner.app.data.DocumentRepository
 import com.docscanner.app.data.ExportRepository
 import com.docscanner.app.data.ImageLoader
@@ -51,8 +56,41 @@ class AppContainer(context: Context) {
 
     val auth by lazy { AuthRepository(cloud) }
 
-    /** Signs out of Firebase and Google. Local documents stay on the phone. */
+    val syncSettings by lazy { SyncSettings(app) }
+
+    val vault by lazy { VaultRepository(cloud, keys) }
+
+    val syncScheduler by lazy { SyncScheduler(app) }
+
+    /** null without cloud config. */
+    val syncEngine: SyncEngine? by lazy {
+        cloud?.let { SyncEngine(it, database, blobs, vault, syncSettings, documents) }
+    }
+
+    /** Debounced background sync after local edits, only while the user has backup on. */
+    fun wireSync() {
+        if (cloud == null) {
+            appScope.launch { database.outbox().clearAll() } // nothing will ever drain it in this build
+            return
+        }
+        documents.onLocalChange = {
+            appScope.launch {
+                val s = syncSettings.current()
+                if (s.enabled) syncScheduler.requestSoon(s.wifiOnly)
+            }
+        }
+        appScope.launch {
+            val s = syncSettings.current()
+            if (s.enabled && auth.currentUid() != null) syncScheduler.startPeriodic(s.wifiOnly) else syncScheduler.stopAll()
+            // With backup off the outbox only grows; turning backup on queues everything anyway.
+            if (!s.enabled) database.outbox().clearAll()
+        }
+    }
+
+    /** Signs out of Firebase and Google, stops sync and forgets the backup key here. Local documents stay. */
     suspend fun signOut(context: Context) {
+        syncScheduler.stopAll()
+        syncEngine?.forgetLocalSyncState()
         auth.signOut(context)
     }
 }
