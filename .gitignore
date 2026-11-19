@@ -1,0 +1,23 @@
+# This repo lives in a home folder: track only the project paths.
+/*
+!/.gitignore
+!/README.md
+!/settings.gradle.kts
+!/build.gradle.kts
+!/gradle.properties
+!/gradlew
+!/gradlew.bat
+!/gradle/
+!/app/
+!/replica/
+!/tools/
+
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+.cxx/
+tools/imaging-validation/out/
+tools/imaging-validation/__pycache__/

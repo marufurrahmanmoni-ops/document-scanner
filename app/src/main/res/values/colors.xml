@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirrors design/tokens.json: color.bg and color.accent. Used only by the window and the launcher icon. -->
+    <color name="bg">#FFFFFF</color>
+    <color name="accent">#1F5FD6</color>
+    <color name="on_accent">#FFFFFF</color>
+</resources>

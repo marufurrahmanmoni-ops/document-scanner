@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bengali. Draft translation: needs review by a native speaker before release (build-log.md). -->
+<resources>
+    <string name="app_name">DocScanner</string>
+
+    <string name="tab_home">হোম</string>
+    <string name="tab_files">ফাইল</string>
+    <string name="tab_tools">টুলস</string>
+    <string name="tab_settings">সেটিংস</string>
+    <string name="scan_fab_a11y">ডকুমেন্ট স্ক্যান করুন</string>
+    <string name="back">পেছনে</string>
+    <string name="close">বন্ধ করুন</string>
+    <string name="cancel">বাতিল</string>
+    <string name="done">সম্পন্ন</string>
+    <string name="next">পরবর্তী</string>
+    <string name="save">সেভ করুন</string>
+    <string name="save_changes">পরিবর্তন সেভ করুন</string>
+    <string name="delete">মুছুন</string>
+    <string name="discard">বাদ দিন</string>
+    <string name="edit">সম্পাদনা</string>
+    <string name="add">যোগ করুন</string>
+    <string name="share">শেয়ার</string>
+    <string name="rename">নাম বদলান</string>
+    <string name="more_options">আরও অপশন</string>
+
+    <string name="greeting_morning">সুপ্রভাত</string>
+    <string name="greeting_afternoon">শুভ অপরাহ্ন</string>
+    <string name="greeting_evening">শুভ সন্ধ্যা</string>
+    <string name="quick_actions">দ্রুত কাজ</string>
+    <string name="qa_scan">স্ক্যান</string>
+    <string name="qa_batch">অনেক পাতা</string>
+    <string name="qa_import">ইমপোর্ট</string>
+    <string name="recent">সাম্প্রতিক</string>
+    <string name="see_all">সব দেখুন</string>
+    <string name="empty_home_title">এখনও কোনো ডকুমেন্ট নেই</string>
+    <string name="empty_home_body">একটি পাতা স্ক্যান করুন, সেটি এখানে পরিষ্কার PDF হিসেবে দেখাবে।</string>
+    <string name="scan_first">ডকুমেন্ট স্ক্যান করুন</string>
+    <string name="draft_title">একটি স্ক্যান এখনও সেভ হয়নি</string>
+    <string name="draft_body">%1$s সেভ করার অপেক্ষায়।</string>
+    <string name="continue_scan">চালিয়ে যান</string>
+    <string name="importing_n_of_m">%2$d-এর মধ্যে %1$d ইমপোর্ট হচ্ছে…</string>
+    <string name="import_failed">ছবিগুলো ইমপোর্ট করা যায়নি। আবার চেষ্টা করুন।</string>
+
+    <string name="sort_date">তারিখ</string>
+    <string name="sort_name">নাম</string>
+    <string name="empty_files_title">এখানে এখনও কিছু নেই</string>
+    <string name="empty_files_body">সেভ করা ডকুমেন্ট এখানে থাকবে, নতুনগুলো আগে।</string>
+
+    <string name="tools_scan">স্ক্যান</string>
+    <string name="tool_single">এক পাতা স্ক্যান</string>
+    <string name="tool_single_desc">একটি পাতা তুলুন, কাটুন, সেভ করুন</string>
+    <string name="tool_batch">অনেক পাতা স্ক্যান</string>
+    <string name="tool_batch_desc">একটানা তুলুন, তারপর একসাথে দেখে নিন</string>
+    <string name="tool_import">ছবি ইমপোর্ট</string>
+    <string name="tool_import_desc">গ্যালারির ছবি থেকে ডকুমেন্ট বানান</string>
+
+    <string name="close_camera">ক্যামেরা বন্ধ করুন</string>
+    <string name="flash_off">ফ্ল্যাশ বন্ধ</string>
+    <string name="flash_auto">ফ্ল্যাশ স্বয়ংক্রিয়</string>
+    <string name="flash_on">ফ্ল্যাশ চালু</string>
+    <string name="flash_torch">টর্চ চালু</string>
+    <string name="auto_short">অটো</string>
+    <string name="auto_capture_on">স্বয়ংক্রিয় ছবি চালু</string>
+    <string name="auto_capture_off">স্বয়ংক্রিয় ছবি বন্ধ</string>
+    <string name="hint_point">ডকুমেন্টের দিকে ক্যামেরা ধরুন</string>
+    <string name="hint_hold">স্থির রাখুন</string>
+    <string name="hint_capture_failed">হয়নি। আবার চেষ্টা করুন।</string>
+    <string name="mode_single">একক</string>
+    <string name="mode_batch">একাধিক</string>
+    <string name="take_photo">ছবি তুলুন</string>
+    <string name="import_photos">ছবি ইমপোর্ট</string>
+    <string name="saving_page">পাতা সেভ হচ্ছে…</string>
+    <string name="review_pages_a11y">%1$d টি পাতা দেখুন</string>
+    <string name="camera_unavailable">ক্যামেরা চালু হয়নি। অন্য ক্যামেরা অ্যাপ বন্ধ করে আবার চেষ্টা করুন।</string>
+    <string name="camera_permission_title">স্ক্যান করতে ক্যামেরার অনুমতি লাগবে</string>
+    <string name="camera_permission_body">পাতাগুলো আপনার ক্যামেরায় তোলা হয় এবং এই ফোনের বাইরে যায় না।</string>
+    <string name="camera_permission_denied">এই অ্যাপের জন্য ক্যামেরা বন্ধ আছে। সেটিংসে গিয়ে চালু করতে পারেন।</string>
+    <string name="allow_camera">ক্যামেরার অনুমতি দিন</string>
+    <string name="open_settings">সেটিংস খুলুন</string>
+    <string name="import_instead">বরং ছবি ইমপোর্ট করুন</string>
+    <string name="discard_title">এই স্ক্যানটি বাদ দেবেন?</string>
+    <string name="keep_scanning">স্ক্যান চালিয়ে যান</string>
+
+    <string name="adjust_edges">কিনারা ঠিক করুন</string>
+    <string name="retake">আবার তুলুন</string>
+    <string name="auto_detect">অটো</string>
+    <string name="full_page">পুরো ছবি</string>
+    <string name="crop_no_edges">পাতার কিনারা পাওয়া যায়নি। কোণগুলো টেনে পাতার কোণে বসান।</string>
+    <string name="crop_invalid">কোণগুলো একে অপরকে পার হয়েছে। পাতার কোণে ফিরিয়ে আনুন।</string>
+    <string name="page_load_failed">এই পাতাটি খোলা যায়নি।</string>
+
+    <string name="enhance">উন্নত করুন</string>
+    <string name="back_to_crop">কিনারায় ফিরুন</string>
+    <string name="rotate">ঘোরান</string>
+    <string name="page_preview">পাতার প্রিভিউ</string>
+    <string name="apply_to_all">সব %1$d টি পাতায় ব্যবহার করুন</string>
+    <string name="filter_original">মূল</string>
+    <string name="filter_auto">অটো</string>
+    <string name="filter_clean">পরিষ্কার</string>
+    <string name="filter_gray">ধূসর</string>
+    <string name="filter_bw">সাদা-কালো</string>
+    <string name="filter_bw_soft">হালকা সাদা-কালো</string>
+
+    <string name="review_title">পাতা (%1$d)</string>
+    <string name="add_pages">পাতা যোগ করুন</string>
+    <string name="document_name">ডকুমেন্টের নাম</string>
+    <string name="name_required">একটি নাম দিন</string>
+    <string name="no_pages_title">কোনো পাতা নেই</string>
+    <string name="no_pages_body">সেভ করতে অন্তত একটি পাতা যোগ করুন।</string>
+    <string name="page_n">পাতা %1$d</string>
+    <string name="edit_page">কিনারা ও ফিল্টার বদলান</string>
+    <string name="move_earlier">আগে সরান</string>
+    <string name="move_later">পরে সরান</string>
+    <string name="delete_page">পাতা মুছুন</string>
+    <string name="delete_page_title">এই পাতাটি মুছবেন?</string>
+    <string name="delete_page_body">পাতাটি এই ডকুমেন্ট থেকে সরানো হবে।</string>
+    <string name="processing">প্রসেস হচ্ছে</string>
+    <string name="render_failed">প্রসেস করা যায়নি</string>
+
+    <string name="page_counter">%1$d / %2$d</string>
+    <string name="delete_doc_title">এই ডকুমেন্টটি মুছবেন?</string>
+    <string name="delete_doc_body">এটি আপনার ফাইল থেকে সরানো হবে এবং ৩০ দিন পরে স্থায়ীভাবে মুছে যাবে।</string>
+    <string name="exporting_n_of_m">%2$d-এর মধ্যে %1$d তৈরি হচ্ছে…</string>
+    <string name="export_failed">এক্সপোর্ট শেষ হয়নি। আবার চেষ্টা করুন।</string>
+    <string name="saved_to_device">সেভ হয়েছে</string>
+    <string name="share_via">শেয়ার করুন</string>
+
+    <string name="export_title">শেয়ার বা সেভ</string>
+    <string name="format">ফরম্যাট</string>
+    <string name="format_pdf">PDF</string>
+    <string name="format_jpg">JPG ছবি</string>
+    <string name="quality">মান</string>
+    <string name="quality_small">ছোট</string>
+    <string name="quality_balanced">সাধারণ</string>
+    <string name="quality_original">পূর্ণ</string>
+    <string name="page_size">পাতার মাপ</string>
+    <string name="size_fit">স্ক্যান অনুযায়ী</string>
+    <string name="size_a4">A4</string>
+    <string name="size_letter">Letter</string>
+    <string name="save_to_device">ফোনে সেভ করুন</string>
+    <string name="no_watermark_note">আপনার ফাইল যেমন আছে তেমনই এক্সপোর্ট হয়। কোনো ওয়াটারমার্ক নেই।</string>
+
+    <string name="settings_scanning">স্ক্যানিং</string>
+    <string name="default_mode">ক্যামেরা খুলবে</string>
+    <string name="auto_capture">স্বয়ংক্রিয় ছবি</string>
+    <string name="auto_capture_desc">পাতা স্থির হলে নিজে থেকেই ছবি তুলবে</string>
+    <string name="default_filter">ডিফল্ট ফিল্টার</string>
+    <string name="settings_documents">ডকুমেন্ট</string>
+    <string name="default_quality">এক্সপোর্টের মান</string>
+    <string name="default_page_size">PDF পাতার মাপ</string>
+    <string name="settings_privacy">গোপনীয়তা</string>
+    <string name="privacy_local">সবকিছু এই ফোনেই থাকে</string>
+    <string name="privacy_local_desc">স্ক্যানগুলো ফোনে এনক্রিপ্ট করা থাকে। এই অ্যাপের ইন্টারনেট অ্যাক্সেস নেই।</string>
+    <string name="settings_about">সম্পর্কে</string>
+    <string name="version">সংস্করণ</string>
+    <string name="licences">ওপেন-সোর্স লাইসেন্স</string>
+    <string name="licences_body">OpenCV (Apache 2.0) · Google Tink (Apache 2.0) · SQLCipher for Android (BSD-style) · AndroidX and Jetpack Compose (Apache 2.0) · Material Symbols (Apache 2.0) · Kotlin and kotlinx (Apache 2.0)</string>
+
+    <string name="date_today">আজ %1$s</string>
+    <string name="date_yesterday">গতকাল</string>
+    <string name="doc_meta">%1$s · %2$s</string>
+    <string name="doc_a11y">%1$s, %2$s, সম্পাদিত %3$s</string>
+
+    <plurals name="pages">
+        <item quantity="one">%1$d টি পাতা</item>
+        <item quantity="other">%1$d টি পাতা</item>
+    </plurals>
+    <plurals name="discard_body">
+        <item quantity="one">আপনার স্ক্যান করা পাতাটি মুছে যাবে।</item>
+        <item quantity="other">আপনার স্ক্যান করা %1$d টি পাতা মুছে যাবে।</item>
+    </plurals>
+</resources>

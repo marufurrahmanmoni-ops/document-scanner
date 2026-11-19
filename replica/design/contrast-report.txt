@@ -1,0 +1,35 @@
+  AAA   17.74:1  text                     on bg                   
+  AAA   16.53:1  text                     on surface              
+  AAA   15.25:1  text                     on surface-sunken       
+  AAA    7.56:1  text-muted               on bg                   
+  AAA    7.04:1  text-muted               on surface              
+  AA     6.50:1  text-muted               on surface-sunken       
+  AA     5.09:1  text-subtle              on bg                   
+  AA     4.74:1  text-subtle              on surface              
+  AA     5.73:1  on-accent                on accent               
+  AAA    7.87:1  on-accent                on accent-pressed       
+  AA     5.73:1  accent                   on bg                   
+  AA     5.34:1  accent                   on surface              
+  AAA    9.15:1  on-accent-container      on accent-container     
+  AA     5.00:1  accent                   on accent-container     
+  AA     5.63:1  danger                   on bg                   
+  AA     5.63:1  on-danger                on danger               
+  AA     4.93:1  danger                   on danger-container     
+  AA     5.36:1  success                  on bg                   
+  AA     4.73:1  success                  on success-container    
+  AA     5.57:1  warning                  on bg                   
+  AA     5.11:1  warning                  on warning-container    
+  AAA   19.46:1  camera-text              on camera-bg            
+  AAA   16.90:1  camera-text              on camera-surface       
+  AAA   10.61:1  camera-text-muted        on camera-bg            
+  AAA    9.21:1  camera-text-muted        on camera-surface       
+  PASS   3.58:1  border-input             on bg                   ui
+  PASS   3.34:1  border-input             on surface              ui
+  PASS   5.73:1  focus                    on bg                   ui
+  PASS   5.34:1  focus                    on surface              ui
+  PASS  19.46:1  edge-searching           on camera-bg            ui
+  PASS   7.02:1  edge-detected            on camera-bg            ui
+  PASS  10.37:1  edge-locked              on camera-bg            ui
+  PASS   3.40:1  accent                   on camera-bg            ui
+
+  33 pairs, 0 failing AA

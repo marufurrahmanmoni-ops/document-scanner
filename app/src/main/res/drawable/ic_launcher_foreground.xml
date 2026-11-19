@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Original placeholder mark: a page with a folded corner inside scan brackets. replica-brand replaces it. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- page -->
+    <path
+        android:fillColor="@color/on_accent"
+        android:pathData="M42,36h18l8,8v28a2,2 0,0 1,-2 2h-24a2,2 0,0 1,-2 -2v-34a2,2 0,0 1,2 -2z" />
+    <path
+        android:fillColor="@color/accent"
+        android:pathData="M45,50h18v2.5h-18zM45,56h18v2.5h-18zM45,62h12v2.5h-12z" />
+    <!-- scan brackets -->
+    <path
+        android:fillColor="@color/on_accent"
+        android:pathData="M32,32h8v3h-5v5h-3zM76,32h-8v3h5v5h3zM32,76h8v-3h-5v-5h-3zM76,76h-8v-3h5v-5h3z" />
+</vector>
