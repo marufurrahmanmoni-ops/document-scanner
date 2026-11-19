@@ -129,12 +129,45 @@ object EdgeDetector {
                 asInt.release()
                 if (!convex) continue
                 val quad = Quad.fromUnordered(pts.map { NPoint((it.x / w).toFloat(), (it.y / h).toFloat()) })
-                if (anglesSane(quad)) out += quad
+                if (anglesSane(quad) && sidesOnEdges(quad, edges, w, h)) out += quad
             } finally {
                 c.release()
             }
         }
         return out
+    }
+
+    /**
+     * A real page has four straight sides lying on edge pixels. A ragged contour made of unrelated lines (cables,
+     * wood grain, clutter) can still simplify to four points, but its "sides" cut across empty space. Each side must
+     * have edge pixels (within 2 px) under at least 70% of its middle 80%. Bowed book pages stay within 2% of the
+     * chord, which the dilated edge map and the 2 px window absorb.
+     */
+    private fun sidesOnEdges(q: Quad, edges: Mat, w: Int, h: Int): Boolean {
+        val p = q.points
+        val buf = ByteArray(1)
+        for (i in 0 until 4) {
+            val a = p[i]
+            val b = p[(i + 1) % 4]
+            val ax = a.x * w; val ay = a.y * h; val bx = b.x * w; val by = b.y * h
+            val samples = 40
+            var hit = 0
+            for (k in 0 until samples) {
+                val t = 0.1f + 0.8f * k / (samples - 1)
+                val x = (ax + (bx - ax) * t).toInt()
+                val y = (ay + (by - ay) * t).toInt()
+                var found = false
+                loop@ for (dy in -2..2) for (dx in -2..2) {
+                    val xx = x + dx; val yy = y + dy
+                    if (xx < 0 || yy < 0 || xx >= w || yy >= h) continue
+                    edges.get(yy, xx, buf)
+                    if (buf[0].toInt() != 0) { found = true; break@loop }
+                }
+                if (found) hit++
+            }
+            if (hit < samples * 0.7) return false
+        }
+        return true
     }
 
     /** Every corner between 45 and 135 degrees. Rejects slivers and kites. */

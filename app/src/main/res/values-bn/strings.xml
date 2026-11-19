@@ -275,4 +275,5 @@
         <item quantity="one">আপনার স্ক্যান করা %1$d টি পাতা মুছে যাবে।</item>
         <item quantity="other">আপনার স্ক্যান করা %1$d টি পাতা মুছে যাবে।</item>
     </plurals>
+    <string name="developer">ডেভেলপার</string>
 </resources>

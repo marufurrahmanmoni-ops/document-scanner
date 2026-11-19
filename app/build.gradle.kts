@@ -19,6 +19,12 @@ val localProps = Properties().apply {
     if (f.exists()) f.inputStream().use { load(it) }
 }
 fun cfg(name: String): String = (localProps.getProperty(name) ?: System.getenv(name) ?: "").trim()
+/**
+ * Robolectric tests (Compose UI + Room on the JVM) live in src/testRobolectric and run with -Probolectric=true.
+ * They are opt-in because Robolectric downloads ~100 MB Android runtime jars that some networks block.
+ */
+val robolectricTests = (findProperty("robolectric") as String?) == "true"
+
 fun quoted(name: String): String = "\"" + cfg(name).replace("\"", "") + "\""
 
 android {
@@ -31,6 +37,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "FIREBASE_API_KEY", quoted("FIREBASE_API_KEY"))
         buildConfigField("String", "FIREBASE_APP_ID", quoted("FIREBASE_APP_ID"))
@@ -70,8 +77,22 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("test") {
+            if (robolectricTests) java.srcDir("src/testRobolectric/java")
+        }
+        // Exported Room schemas, so MigrationTestHelper can build v1 databases on a device.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
+
     testOptions {
         unitTests.isReturnDefaultValues = true
+        // Robolectric needs merged resources and the manifest to run Compose UI and Room on the JVM.
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all {
+            it.maxHeapSize = "2g"
+            it.systemProperty("robolectric.logging.enabled", "true")
+        }
     }
 }
 
@@ -138,4 +159,27 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    if (robolectricTests) {
+        testImplementation(libs.robolectric)
+        testImplementation(libs.androidx.test.core)
+        testImplementation(libs.androidx.test.ext)
+        testImplementation(platform(libs.androidx.compose.bom))
+        testImplementation(libs.compose.ui.test.junit4)
+        testImplementation(libs.room.testing)
+        testImplementation(libs.work.testing)
+    }
+    // Desktop OpenCV natives so the app's real imaging code runs in JVM tests.
+    testImplementation(libs.opencv.desktop)
+    debugImplementation(libs.compose.ui.test.manifest)
+
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.uiautomator)
+    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }

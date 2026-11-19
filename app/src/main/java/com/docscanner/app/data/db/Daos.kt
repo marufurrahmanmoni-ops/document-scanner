@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 private const val COVER_THUMB =
@@ -136,10 +137,12 @@ interface SyncDao {
     suspend fun pageIdsOfReadyDocuments(): List<String>
 
     // Remote changes are written straight to the tables so they never echo back into the outbox.
-    @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
+    // @Upsert (INSERT, then UPDATE on conflict), never REPLACE: REPLACE deletes the row first, and with
+    // ON DELETE CASCADE that wiped every page of a document renamed on another phone (BUG-001).
+    @Upsert
     suspend fun upsertDocument(doc: DocumentEntity)
 
-    @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsertPage(page: PageEntity)
 
     @Query(

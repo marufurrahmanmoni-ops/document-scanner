@@ -291,4 +291,6 @@
         <item quantity="one">The page you scanned will be deleted.</item>
         <item quantity="other">The %1$d pages you scanned will be deleted.</item>
     </plurals>
+    <string name="developer">Developer</string>
+    <string name="developer_name" translatable="false">Md. Marufur Rahman Moni</string>
 </resources>

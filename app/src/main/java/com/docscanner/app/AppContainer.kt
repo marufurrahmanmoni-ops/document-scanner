@@ -27,20 +27,33 @@ import kotlinx.coroutines.SupervisorJob
  * Manual dependency container. Hilt is planned (architecture.md section 2) and replaces this
  * when the app splits into modules. Every dependency is created once, lazily.
  */
-class AppContainer(context: Context) {
+class AppContainer(context: Context, private val overrides: Overrides? = null) {
+
+    /**
+     * Test seams: tests pass an in-memory database, a BlobStore with a test key and no cloud.
+     * The app always uses the defaults (encrypted SQLCipher DB, Keystore-backed keys).
+     */
+    class Overrides(
+        val database: AppDatabase,
+        val blobs: BlobStore,
+        val cloud: CloudServices? = null,
+        val lowRam: Boolean = true,
+    )
+
     private val app = context.applicationContext
 
     val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     private val keys by lazy { KeyManager(app) }
 
-    val blobs by lazy { BlobStore(app.filesDir, keys.streamingAead) }
+    val blobs by lazy { overrides?.blobs ?: BlobStore(app.filesDir, keys.streamingAead) }
 
-    val database by lazy { AppDatabase.create(app, keys.databasePassphrase()) }
+    val database by lazy { overrides?.database ?: AppDatabase.create(app, keys.databasePassphrase()) }
 
     private val renderer by lazy { PageRenderer(blobs) }
 
     private val lowRam: Boolean by lazy {
+        overrides?.let { return@lazy it.lowRam }
         val am = app.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         am.isLowRamDevice || am.memoryClass < 256
     }
@@ -54,7 +67,7 @@ class AppContainer(context: Context) {
     val images by lazy { ImageLoader(blobs) }
 
     /** null when this build has no Firebase configuration: every cloud feature then explains itself as off. */
-    val cloud: CloudServices? by lazy { CloudServices.create(app) }
+    val cloud: CloudServices? by lazy { if (overrides != null) overrides.cloud else CloudServices.create(app) }
 
     val auth by lazy { AuthRepository(cloud) }
 

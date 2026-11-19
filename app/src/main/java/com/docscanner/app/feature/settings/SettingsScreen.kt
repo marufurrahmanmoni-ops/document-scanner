@@ -1,6 +1,13 @@
 package com.docscanner.app.feature.settings
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -111,6 +118,18 @@ fun SettingsScreen(contentPadding: PaddingValues, onOpenAccount: () -> Unit) {
         )
 
         SectionHeader(stringResource(R.string.settings_about), Modifier.padding(horizontal = Dimens.gutterCompact))
+        ListItem(
+            leadingContent = {
+                Image(
+                    painter = painterResource(R.drawable.developer_photo),
+                    contentDescription = null, // the name next to it says who this is
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(56.dp).clip(CircleShape),
+                )
+            },
+            overlineContent = { Text(stringResource(R.string.developer)) },
+            headlineContent = { Text(stringResource(R.string.developer_name)) },
+        )
         ListItem(
             headlineContent = { Text(stringResource(R.string.version)) },
             supportingContent = { Text(BuildConfig.VERSION_NAME) },
