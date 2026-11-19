@@ -234,6 +234,28 @@
     <string name="backup_synced_conflicts">সিঙ্ক হয়েছে। অন্য ফোনের কিছু সম্পাদনা নতুন ছিল।</string>
     <string name="backup_wrong_account">এই ফোন অন্য অ্যাকাউন্টের ব্যাকআপ নিচ্ছে। সাইন আউট করে আবার সাইন ইন করুন।</string>
 
+    <string name="sub_title">সাবস্ক্রিপশন</string>
+    <string name="sub_unavailable_build">এই বিল্ডে সাবস্ক্রিপশন সেট আপ করা নেই।</string>
+    <string name="sub_unavailable_now">Google Play-তে এখন দেখানোর মতো কোনো প্ল্যান নেই।</string>
+    <string name="sub_price">%1$s %2$s</string>
+    <string name="sub_subscribe">Google Play দিয়ে সাবস্ক্রাইব করুন</string>
+    <string name="sub_cancel_note">Google Play-তে যেকোনো সময় বাতিল করুন। যে সময়ের টাকা দিয়েছেন তার শেষ পর্যন্ত ব্যবহার করতে পারবেন।</string>
+    <string name="sub_restore">কেনাকাটা ফিরিয়ে আনুন</string>
+    <string name="sub_active">আপনার সাবস্ক্রিপশন চালু আছে</string>
+    <string name="sub_renews">নবায়ন %1$s</string>
+    <string name="sub_ends">শেষ %1$s, নবায়ন হবে না</string>
+    <string name="sub_manage">Google Play-তে পরিচালনা বা বাতিল করুন</string>
+    <string name="sub_thanks">ধন্যবাদ! আপনার সাবস্ক্রিপশন চালু হয়েছে।</string>
+    <string name="sub_pending">পেমেন্ট অপেক্ষায় আছে। Google Play নিশ্চিত করলে চালু হবে।</string>
+    <string name="sub_cancelled">কেনাকাটা বাতিল হয়েছে।</string>
+    <string name="sub_failed">এখনও কেনাকাটা নিশ্চিত করা যায়নি। একটু পরে "কেনাকাটা ফিরিয়ে আনুন" চাপুন।</string>
+    <string name="period_week">প্রতি সপ্তাহ</string>
+    <string name="period_month">প্রতি মাস</string>
+    <string name="period_quarter">প্রতি ৩ মাস</string>
+    <string name="period_half_year">প্রতি ৬ মাস</string>
+    <string name="period_year">প্রতি বছর</string>
+    <string name="period_other">প্রতি মেয়াদে</string>
+
     <plurals name="pages">
         <item quantity="one">%1$d টি পাতা</item>
         <item quantity="other">%1$d টি পাতা</item>

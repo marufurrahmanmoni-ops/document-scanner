@@ -3,6 +3,7 @@ package com.docscanner.app
 import android.app.ActivityManager
 import android.content.Context
 import com.docscanner.app.cloud.AuthRepository
+import com.docscanner.app.cloud.BillingRepository
 import com.docscanner.app.cloud.CloudServices
 import com.docscanner.app.cloud.sync.SyncEngine
 import com.docscanner.app.cloud.sync.SyncScheduler
@@ -55,6 +56,8 @@ class AppContainer(context: Context) {
     val cloud: CloudServices? by lazy { CloudServices.create(app) }
 
     val auth by lazy { AuthRepository(cloud) }
+
+    val billing by lazy { BillingRepository(app, cloud, appScope) }
 
     val syncSettings by lazy { SyncSettings(app) }
 

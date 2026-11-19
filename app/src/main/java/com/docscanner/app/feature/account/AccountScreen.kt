@@ -148,6 +148,7 @@ fun AccountScreen(onBack: () -> Unit) {
                     else -> {
                         SignedIn(vm, acc, busy)
                         BackupSection(acc) { snackbar.showSnackbar(context.getString(it)) }
+                        SubscriptionSection(acc) { snackbar.showSnackbar(context.getString(it)) }
                     }
                 }
             }
