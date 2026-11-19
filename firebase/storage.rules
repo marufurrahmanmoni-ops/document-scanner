@@ -1,0 +1,29 @@
+rules_version = '2';
+
+// DocScanner Cloud Storage rules (replica/backend.md "Security").
+// Only encrypted originals live here, at users/{uid}/blobs/{hmac-name}. No public URLs, no listing of
+// other users' folders, no overwrites (objects are content-addressed and immutable).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /users/{uid}/blobs/{name} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && (request.auth.token.email_verified == true
+            || request.auth.token.firebase.sign_in_provider != 'password')
+        && name.matches('^[0-9a-f]{64}$')
+        && request.resource.size > 0
+        && request.resource.size < 60 * 1024 * 1024
+        && request.resource.contentType == 'application/octet-stream';
+      allow update: if false;
+    }
+
+    // Folder listing is only needed for account deletion, and only of your own folder.
+    match /users/{uid}/blobs {
+      allow list: if request.auth != null && request.auth.uid == uid;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

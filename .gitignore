@@ -21,3 +21,9 @@ local.properties
 .cxx/
 tools/imaging-validation/out/
 tools/imaging-validation/__pycache__/
+!/firebase/
+firebase/node_modules/
+firebase/functions/node_modules/
+firebase/functions/lib/
+firebase/*.log
+firebase/.firebaserc

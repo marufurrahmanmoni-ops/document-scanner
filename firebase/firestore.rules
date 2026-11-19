@@ -1,0 +1,81 @@
+rules_version = '2';
+
+// DocScanner Firestore rules (replica/backend.md "Security").
+// Model: every byte belongs to exactly one signed-in user, under users/{uid}. Nothing is public.
+// Document contents are end-to-end encrypted on the phone; these rules protect who can read/write the
+// ciphertext and keep the record format honest. Anything not matched below is denied.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Password accounts must confirm their email before uploading anything.
+    function verifiedOrFederated() {
+      return request.auth.token.email_verified == true
+        || request.auth.token.firebase.sign_in_provider != 'password';
+    }
+
+    function onlyKeys(allowed) {
+      return request.resource.data.keys().hasOnly(allowed);
+    }
+
+    // ---------------------------------------------------------------- profile
+    match /users/{uid} {
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && onlyKeys(['displayName', 'createdAt', 'updatedAt'])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 80
+        && request.resource.data.updatedAt == request.time;
+
+      // ------------------------------------------------------------ backup key (wrapped by the passphrase)
+      match /vault/{docId} {
+        allow read, delete: if isOwner(uid) && docId == 'key';
+        allow create, update: if isOwner(uid) && docId == 'key' && verifiedOrFederated()
+          && onlyKeys(['version', 'salt', 'iterations', 'wrappedKey', 'updatedAt'])
+          && request.resource.data.version == 1
+          && request.resource.data.salt is bytes && request.resource.data.salt.size() == 16
+          && request.resource.data.iterations is int && request.resource.data.iterations >= 100000
+          && request.resource.data.wrappedKey is bytes && request.resource.data.wrappedKey.size() <= 128
+          && request.resource.data.updatedAt == request.time;
+      }
+
+      // ------------------------------------------------------------ encrypted sync records
+      match /records/{recordId} {
+        allow read, delete: if isOwner(uid);
+
+        // rev must go up by exactly one: the server-side half of the optimistic-concurrency check.
+        allow create: if isOwner(uid) && verifiedOrFederated() && validRecord(recordId)
+          && request.resource.data.rev == 1;
+        allow update: if isOwner(uid) && verifiedOrFederated() && validRecord(recordId)
+          && request.resource.data.rev == resource.data.rev + 1
+          && request.resource.data.entity == resource.data.entity
+          && request.resource.data.entityId == resource.data.entityId;
+      }
+
+      // ------------------------------------------------------------ subscription state: server only
+      match /entitlements/{docId} {
+        allow read: if isOwner(uid);
+        allow write: if false; // written by Cloud Functions (Admin SDK bypasses rules) after verifying with Google Play
+      }
+    }
+
+    function validRecord(recordId) {
+      let d = request.resource.data;
+      return onlyKeys(['entity', 'entityId', 'rev', 'deviceId', 'deleted', 'clientUpdatedAt',
+                       'serverUpdatedAt', 'payload', 'blobs'])
+        && d.entity in ['document', 'page']
+        && d.entityId is string && d.entityId.size() <= 64
+        && recordId == d.entity + '_' + d.entityId
+        && d.rev is int
+        && d.deviceId is string && d.deviceId.size() <= 64
+        && d.deleted is bool
+        && d.clientUpdatedAt is int
+        && d.serverUpdatedAt == request.time
+        && d.payload is bytes && d.payload.size() <= 65536
+        && d.blobs is list && d.blobs.size() <= 4;
+    }
+  }
+}
